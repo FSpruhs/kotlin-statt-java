@@ -11,6 +11,12 @@
 \usepackage{graphicx}
 \usepackage{tocloft}
 \usepackage{appendix}
+\usepackage{csquotes}
+\usepackage[
+    backend=biber,
+    style=alphabetic,
+]{biblatex}
+\addbibresource{literaturverzeichnis.bib}
 
 % Document
 \begin{document}
@@ -39,6 +45,11 @@
     \subsection{bla bla 2}
         more content
 
+    \printbibliography[
+        heading=bibintoc,
+        title={Literaturverzeichnis}
+    ]
+
     \appendix
     \section{Anhang}
 
@@ -55,6 +66,10 @@
         \caption{Beschreibung der ersten Grafik}
         \label{fig:grafik2}
     \end{figure}
+
+    \cite{insel}
+    \cite{kotlin-handbuch}
+
 
 
 \end{document}
