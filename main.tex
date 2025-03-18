@@ -9,6 +9,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
 \usepackage{graphicx}
+\usepackage{tcolorbox}
 \usepackage{tocloft}
 \usepackage{appendix}
 \usepackage{csquotes}
@@ -17,7 +18,53 @@
     style=alphabetic,
 ]{biblatex}
 \usepackage{color}
+\usepackage{listings}
+\usepackage{xcolor}
 \addbibresource{literaturverzeichnis.bib}
+
+
+% Farben für Syntax-Highlighting definieren
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Kotlin-Sprache für listings konfigurieren
+\lstdefinelanguage{Kotlin}{
+    morekeywords={fun, class, object, val, var, when, if, else, for, while, return, import, package, is, as, null, true, false},
+    sensitive=true,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+}
+
+% Java-Sprache für listings konfigurieren (Java ist bereits vordefiniert, aber hier ein Beispiel für Anpassungen)
+\lstdefinelanguage{Java}{
+    morekeywords={public, private, protected, class, static, void, if, else, while, for, return, import, package, new},
+    sensitive=true,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+}
+
+\lstset{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{red},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
 
 % Document
 \begin{document}
@@ -136,6 +183,109 @@
     Nach dem TIOBE index befindet sich Kotlin im März 2025 nur auf Platz 19 der relevantesten Sprachen, siehe Abbildung \ref{fig:tiobe-kotlin-2025}.
     Es gibt aber auch gute Nachrichten für Kotlin im Bezug auf die Verbreitung und relevanz. Kotlin wurde von Google
     zu der bevorzugten Sprache für die Android Entwicklung erklärt \cite{tn3-google}.
+
+    \section{Interoperabilität zwischen Java und Kotlin}
+
+    \subsection{Kotlin in Java integrieren}
+    Kotlin und Java lassen sich problemlos in einem Projekt kombinieren, was mehrere Vorteile mit sich bringt.
+    Einerseits können in Kotlin geschriebene Pakete in Java verwendet werden und umgekehrt.
+    Andererseits ermöglicht diese Kompatibilität, bestehende Java-Projekte mit Kotlin weiterzuführen oder
+    schrittweise auf Kotlin umzustellen, ohne den vorhandenen Code sofort ersetzen zu müssen.
+    Dies ist besonders relevant für Unternehmen mit großen Java-Codebasen, die nicht abrupt auf Kotlin wechseln können. \cite[20]{kotlin-handbuch}
+
+    Im folgenden Beispiel werden verschiedene Möglichkeiten vorgestellt, wie Kotlin-Code in einer Java-Umgebung ausgeführt
+    werden kann. Die zugehörige \texttt{.java}-Datei enthält eine Java-Klasse mit einer \texttt{main}-Methode.
+    In dieser Datei wird Kotlin-Code aus einer \texttt{.kt}-Datei importiert und ausgeführt, da Kotlin-Quellcode stets
+    in Dateien mit der Endung \texttt{.kt} gespeichert wird.
+
+    \begin{lstlisting}[language=Kotlin, caption={KotlinGreeter.kt}]
+package main.java.com.spruhs
+
+class ClassGreeter {
+    fun greet() {
+        println("Hello from kotlin class method!")
+    }
+}
+
+class StaticGreeter {
+    companion object {
+
+        @JvmStatic
+        fun greet() {
+            println("Hello from kotlin static method!")
+        }
+    }
+}
+
+object SingletonGreeter {
+    fun greet() {
+        println("Hello from kotlin singleton method!")
+    }
+}
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Java, caption={Main.java}]
+import main.java.com.spruhs.ClassGreeter;
+import main.java.com.spruhs.SingletonGreeter;
+import main.java.com.spruhs.StaticGreeter;
+
+public static void main(String[] args) {
+    ClassGreeter classGreeter = new ClassGreeter();
+    classGreeter.greet();
+
+    StaticGreeter.greet();
+
+    SingletonGreeter.INSTANCE.greet();
+}
+    \end{lstlisting}
+
+    \begin{tcolorbox}[colback=black!5!white, colframe=black, title=Ausgabe]
+        Hello from kotlin class method!\\
+        Hello from kotlin static method!\\
+        Hello from kotlin singleton method!
+    \end{tcolorbox}
+    
+    \subsection{Java in Kotlin integrieren}
+    Auch umgekehrt ist die Integration von Java in Kotlin möglich. Dies hat vor allem den Vorteil, dass bestehende Java-Bibliotheken und -Frameworks
+    in Kotlin-Projekten verwendet werden können. Im folgenden Beispiel werden 2 verschiedene Möglichkeiten vorgestellt, wie Java-Code von Kotlin importiert und ausgeführt wird.
+
+    \begin{lstlisting}[language=Java, caption={JavaClassMethodGreeter.java}]
+package main.kotlin.com.spruhs;
+
+public class JavaClassMethodGreeter {
+    public void greet() {
+        System.out.println("Hello from java class method!");
+    }
+}
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Java, caption={JavaStaticGreeter.java}]
+package main.kotlin.com.spruhs;
+
+public class JavaStaticGreeter {
+    public static void greet() {
+        System.out.println("Hello from java static method!");
+    }
+}
+
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Kotlin, caption={Main.kt}]
+package main.kotlin.com.spruhs
+
+fun main() {
+    val javaClassMethodGreeter = JavaClassMethodGreeter()
+    javaClassMethodGreeter.greet()
+
+    JavaStaticGreeter.greet()
+}
+    \end{lstlisting}
+
+    \begin{tcolorbox}[colback=black!5!white, colframe=black, title=Ausgabe]
+        Hello from java class method!\\
+        Hello from java static method!\\
+    \end{tcolorbox}
+
 
 
     \printbibliography[
