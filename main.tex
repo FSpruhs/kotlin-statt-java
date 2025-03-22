@@ -360,6 +360,100 @@ fun main() {
     \end{table}
 
     \subsection{Null-safety}
+    Tony Hoare war 1965 an der Einführung der ersten Null-Referenz in der Objektorientierte Sprache ALGOL W beteiligt.
+    Im Jahre 2009 bezeichnete er dies als "Milliarden-Dollar-Fehler"~\cite{billion-dollar-mistake}.
+    In Java wurde dieser Fehler durch die Einführung von \texttt{null} als Referenzwert weitergeführt.
+    Dort können alle Referenztypen, ausser den Primitiven Datentypen, den Wert \texttt{null} annehmen.
+    Dies führt zu einer Vielzahl von NullPointerExceptions, die in Java-Programmen auftreten können.
+    Um dies zu verhindern müsste man in Java jedes mal überprüfen ob eine Referenz \texttt{null} ist bevor man auf diese zugreift.
+    Wenn man das im Code Konsequenz umsetzten würde, wird dass zu sehr viel Boilerplate Code führen der die Lesbarkeit des Codes verschlechtert.\\
+    Kotlin hat aus diesem Fehler gelernt und setzt auf Null-Safety.
+    In Kotlin sind Referenzen standardmäßig nicht nullbar.
+    Sie können nur null sein, wenn sie explizit als nullable deklariert werden.
+    Dies geschieht durch die Verwendung des Fragezeichens \texttt{?} nach dem Typ.
+    Der Compiler erzwingt die Überprüfung von null-Werten und verhindert so das Auftreten von NullPointerExceptions.
+    Dieses Feature trägt erheblich zur Robustheit und Stabilität von Kotlin-Programmen bei und erleichtert die Fehlersuche und -behebung.
+    In Listing \ref{lst:kotlin-null-safety} wird die Null-Safety in Kotlin demonstriert.
+    Es werden zuerst zwei Variabeln vom Type String deklariert.
+    Eine davon ist nullable und die andere nicht.
+    Danach werden beiden Vraibeln der Wert \texttt{null} zugewiesen.
+    Dies führt bei der nicht nullable Variabel zu einem Compiler Fehler. \\
+
+    Weiterhin bietet Kotlin noch möglichkeiten mit null-Werten umzugehen.
+    Dazu gibt es zum einem die Möglichkeit mit dem Operator \texttt{?.} auf eine Referenz zuzugreifen die potenziell \texttt{null} sein kann.
+    Falls diese Referenz \texttt{null} ist wird der Ausdruck nicht weiter ausgeführt und es wird \texttt{null} zurückgegeben und keine NullPointerException ausgelöst.
+    Weiterhin gibt es den Elvis-Operator \texttt{?:} der es ermöglicht einen Default-Wert zurückzugeben falls die Referenz \texttt{null} ist.
+    In Listing~\ref{lst:kotlin-user-null-safety} wird die Null-Safety in Kotlin demonstriert.
+    Hierfür gibt es die \texttt{data class} KotlinUser die ein Attribut \texttt{name} hat.
+    Die Funktion nimmt ein KotlinUser Objekt entgegen das Potenziell \texttt{null} sein kann und gibt den Namen zurück.
+    Durch den \texttt{?.} Operator kann auf das Attribut \texttt{name} zugegriffen werden ohne vorher zu überprüfen ob das Objekt \texttt{null} ist.
+    Falls das Objekt \texttt{null} ist wird durch den \texttt{?:} Operator der Default-Wert \texttt{Unbekannter Benutzer} zurückgegeben.
+    Dies wird in der Main Methode einmal mit einem Objekt und einmal mit einem \texttt{null} Wert demonstriert.\\
+    In Listing~\ref{lst:java-user-null-safety} wird das gleiche Beispiel in Java gezeigt.
+    Hier lässt sich gut ablesen wie viel Boilerplate Code in Java notwendig ist um das gleiche Ergebnis zu erzielen.
+
+
+
+
+    \begin{lstlisting}[language=Kotlin, caption={KotlinNullSafety.kt}, label={lst:kotlin-null-safety}]
+    fun testNullSafety() {
+        var nullableVariable: String?
+        var nonNullableVariable: String
+
+        nullableVariable = null // Kein Compiler Fehler
+        nonNullableVariable = null // Compiler Fehler
+    }
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Kotlin, caption={KotlinUser.kt}, label={lst:kotlin-user-null-safety}]
+        package main.kotlin.com.spruhs
+
+        fun getUserName(user: KotlinUser?): String {
+        return user?.name ?: "Unbekannter Benutzer"
+        }
+
+        data class KotlinUser(val name: String)
+
+        fun main() {
+        val user1: KotlinUser = KotlinUser("Fabian")
+        val user2: KotlinUser? = null
+
+        println(getUserName(user1)) // Ausgabe: Fabian
+        println(getUserName(user2)) // Ausgabe: Unbekannter Benutzer
+        }
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Java, caption={NullHandlingExample.java}, label={lst:java-user-null-safety}]
+    package main.kotlin.com.spruhs;
+
+class JavaUser {
+    private String name;
+
+    public JavaUser(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+public class NullHandlingExample {
+    public static String getUserName(JavaUser user) {
+        return (user != null && user.getName() != null) ? user.getName() : "Unbekannter Benutzer";
+    }
+
+    public static void main(String[] args) {
+        JavaUser user1 = new JavaUser("Fabian");
+        JavaUser user2 = null;
+
+        System.out.println(getUserName(user1)); // Ausgabe: Fabian
+        System.out.println(getUserName(user2)); // Ausgabe: Unbekannter Benutzer
+    }
+}
+    \end{lstlisting}
+
+    \subsection{Funktionale Programierung}
 
 
 
