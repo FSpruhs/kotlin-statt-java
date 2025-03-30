@@ -12,5 +12,6 @@
         <module>java-module</module>
         <module>kotlin-module</module>
         <module>nullable-module</module>
+        <module>functional-module</module>
     </modules>
 </project>

@@ -455,6 +455,61 @@ public class NullHandlingExample {
 
     \subsection{Funktionale Programierung}
 
+    Funktionale Programierung hat in den letzten Jahren mehr an bedeutung gewonnen.
+    Ein grund dafür ist, dass entwicklung der CPU Geschwindigkeit nicht mehr so gross ist wie in den vorherigen Jahren.
+    Aus diesem Grund ist es wichtig geworden, das Programme paralleler ausgeführt werden.
+    So kann die ausführung auf mehrere CPU aufgeteilt werden.
+    Die Funktionale Programierung eigenet sich sehr gut um diese Parallelisierung zu erreichen~\cite[129]{kotlin-patterns}.
+    Kotlin wurde von anfang an mit dem Ziel entwickelt, eine moderne Programmiersprache zu schaffen, die sowohl objektorientierte als auch funktionale Programmierparadigmen unterstützt.
+    Java wurde als rein objektorientierte Sprache entwickelt und hat erst seit der Version 8 funktionale Features hinzugefügt.
+    Im folgenden werden einige der wichtigsten funktionalen Features von Kotlin vorgestellt und mit Java vergleichen, soweit diese dort vorhanden sind.\\
+
+    \subsubsection{Higher-Order-Functions}
+    Kotlin unterstützt Higher-Order-Functions, die Funktionen als Parameter akzeptieren oder Funktionen zurückgeben können.
+    Dabei sind in Kotlin Funktionen First-Class Citizens, was bedeutet, dass sie wie andere Datentypen behandelt werden können.
+    In Java können keine Funktionen übergeben werden.
+    Für die Funktionale Programierung in Java wird stattdessen die Funktionalität in einer Methode implementiert, sodass die Funktion zu einem Objekt mit einer Methode wird.
+    Lambda-Ausdrücke, bzw. Methoden/Konstruktorreferenzen geben eine kompakte Syntax ohne dabei eine extra Klasse mit einer Methode zu schreiben~\cite[820]{insel}.
+    In den folgenden zwei Code Beispielen ist eine Funktion implementiert die zwei Zahlen und eine Funktion entgegen nimmt.
+    Die entgegengenommene Funktion nimmt zwei Zahlen entgegen und gibt eine Zahl zurück.
+    In Listing~\ref{lst:kotlin-higher-order-function} ist diese Funktion in Kotlin und in Listing~\ref{lst:java-higher-order-function} in Java implementiert.
+    An der Kotlin implementierung ist zu sehen, dass keine Klasse für die implementierung Notwendig ist.
+    In der Java implementierung wird die Methode als statische methode einer Klasse implementiert.
+    Weiterhin ist in der Java implementierung die Funktion als Übergabe Parameter nur in Verbindung mit dem Funktionalen Interface BiFunction möglich.
+    Diese muss zuerst noch importiert werden.
+    In Kotlin ist solch ein Funktionales Interface nicht nötig.
+
+    \begin{lstlisting}[language=Kotlin, caption={HigherOrderKotlin.kt}, label={lst:kotlin-higher-order-function}]
+package main.kotlin.com.spruhs
+
+fun operateOnNumbers(a: Int, b: Int, operation: (Int, Int) -> Int): Int {
+return operation(a, b)
+}
+
+fun main() {
+val sum = operateOnNumbers(5, 3) { x, y -> x + y }
+println(sum) // Ausgabe 8
+}
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Java, caption={HigherOrderJava.java}, label={lst:java-higher-order-function}]
+package main.kotlin.com.spruhs;
+
+import java.util.function.BiFunction;
+
+public class HigherOrderJava {
+
+public static int operateOnNumbers(int a, int b, BiFunction<Integer, Integer, Integer> operation) {
+return operation.apply(a, b);
+}
+
+public static void main(String[] args) {
+int sum = operateOnNumbers(5, 3, (x, y) -> x + y);
+System.out.println(sum); // Ausgabe 8
+}
+}
+    \end{lstlisting}
+
 
 
     \printbibliography[
