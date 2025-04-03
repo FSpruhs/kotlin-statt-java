@@ -510,6 +510,98 @@ System.out.println(sum); // Ausgabe 8
 }
     \end{lstlisting}
 
+    \subsubsection{Inline Functions}
+    Kotlin unterstützt Inline-Funktionen, die es ermöglichen, den Overhead von Funktionsaufrufen zu reduzieren.
+    Dies ist besonders nützlich in Verbindung mit Higher-Order-Functions, da es die Leistung verbessert und den Code optimiert.
+    Ein vergleichbares Feature in Java ist die Verwendung von Lambda-Ausdrücken, die jedoch nicht den gleichen Grad an Optimierung bieten wie Kotlin's Inline-Funktionen.
+    Bei einer inline Funktion wird der Code der Funktion an der Stelle des Aufrufs eingefügt, anstatt einen Funktionsaufruf durchzuführen.
+    Dadurch wird der Overhead von Funktionsaufrufen reduziert und die Leistung verbessert.
+    In Listing~\ref{lst:kotlin-inline-function} ist eine Inline-Funktion in Kotlin implementiert.
+    Diese Funktion nimmt einen String und eine Funktion entgegen, die einen String als Parameter akzeptiert und einen String zurückgibt.
+    In der Funktion wird die übergebene Funktion auf den übergebenen String angewendet.
+    Dabei wird bei dem Aufruf der Funktion die übergebene Funktion inline in den Code eingefügt.
+    Dies wird durch das Schlüsselwort \texttt{inline} erreicht~\cite{kotlin-inline}.
+
+    \begin{lstlisting}[language=Kotlin, caption={HigherOrderJava.java}, label={kotlin-inline-function}]
+package main.kotlin.com.spruhs
+
+inline fun transformString(input: String, transform: (String) -> String): String {
+    return transform(input)
+}
+
+fun main() {
+    val result = transformString("Hello, World!") { it.uppercase() }
+    println(result) // Ausgabe: HELLO, WORLD!
+}
+    \end{lstlisting}
+
+    \subsection{Threads und Coroutines}
+    In Java werden Threads verwendet, um parallele Ausführung zu ermöglichen.
+    Ein Java Thread ist eine 1 zu 1 Abbildung auf einen Betriebssystem-Thread~\cite[940]{insel}.
+    Das bedeutet, dass jeder Java-Thread direkt mit einem Betriebssystem-Thread verknüpft ist.
+    Zu jedem Thread gehört dann ein eigener Stack und ein eigener Speicherbereich.
+    Threads sind in Java relativ schwergewichtig und benötigen viel Overhead.
+    Dadurch kann Java nur eine begrenzte Anzahl von Threads gleichzeitig ausführen.
+    Zu viele Threads würden sonst sehr schnell zu einem Mangel an Systemressourcen führen.
+    Dieses Problem lässt sich in Java mit Thread-Pools lösen.
+    Ein Thread-Pool ist eine Sammlung von Threads, die wiederverwendet werden können, um Aufgaben auszuführen.
+    Dabei ist die Anzahl der Threads im Pool begrenzt.
+    Wenn ein Thread im Pool blockiert, dann kann dafür kein neuer Thread in den Pool aufgenommen werden.
+    Es können erst wieder neue Threads in den Pool aufgenommen werden, wenn ein Thread abgeschlossen ist und der Pool wieder Platz hat.
+    Dies führt zu einer nicht optimalen Auslastung der Systemressourcen.\\
+    Kotlin bietet eine Alternative zu Threads in Form von Coroutines.
+    Coroutines sind leichtgewichtige Threads, die eine einfachere und effizientere Möglichkeit bieten, parallele und asynchrone Programmierung zu implementieren.
+    Coroutines sind nicht an einen bestimmten System Thread gebunden und können auf verschiedenen Threads ausgeführt werden.
+    Die Verwaltung der Coroutines erfolgt durch den Kotlin-Compiler, der den Overhead von Funktionsaufrufen und Kontextwechseln optimiert.
+    Dabei können Coroutines in einem Thread-Pool ausgeführt werden, ohne dass die Anzahl der Threads im Pool begrenzt ist.
+    Wenn eine Coroutine blockiert, wird der aktuelle Thread nicht blockiert.
+    Dies ermöglicht eine bessere Auslastung der Systemressourcen und eine höhere Effizienz bei der Ausführung von parallelen Aufgaben~\cite[194]{kotlin-patterns}.
+    \\
+    Coroutines:\\
+    Zeit: 305 ms\\
+    Speicher: 2 MB\\
+    Counter: 10.000\\
+
+    Thread-Pool 1:\\
+    Zeit: 20045 ms\\
+    Speicher: 5 MB\\
+    Counter: 200\\
+
+    Thread-Pool 10:\\
+    Zeit: 20031 ms\\
+    Speicher: 4 MB\\
+    Counter: 1.995\\
+
+    Thread-Pool 50:\\
+    Zeit: 20056 ms\\
+    Speicher: 4 MB\\
+    Counter: 9.975\\
+
+    Thread-Pool 100:\\
+    Zeit: 20073 ms\\
+    Speicher: 4 MB\\
+    Counter: 10.000\\
+
+    Thread-Pool 500:\\
+    Zeit: 20204 ms\\
+    Speicher: 5 MB\\
+    Counter: 10.000\\
+
+    Thread-Pool 1.000:\\
+    Zeit: 20263 ms\\
+    Speicher: 4 MB\\
+    Counter: 10.000\\
+
+    Thread-Pool 5.000:\\
+    Zeit: 21041 ms\\
+    Speicher: 5 MB\\
+    Counter: 10.000\\
+
+    Thread-Pool 10.000:\\
+    Zeit: OutOfMemoryError\\
+    Speicher:
+    Counter:
+
 
 
     \printbibliography[

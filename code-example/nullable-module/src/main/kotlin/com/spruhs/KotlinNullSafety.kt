@@ -6,6 +6,6 @@ class KotlinNullSafety {
         var nonNullableVariable: String
 
         nullableVariable = null // Kein Compiler Fehler
-        nonNullableVariable = null // Compiler Fehler
+        //nonNullableVariable = null // Compiler Fehler
     }
 }
