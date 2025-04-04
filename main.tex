@@ -21,6 +21,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage[a4paper, left=3cm, right=3cm]{geometry}
 \addbibresource{literaturverzeichnis.bib}
 
 
@@ -96,15 +97,18 @@
     Kotlin ist eine relativ neue Programmiersprache, die 2011 von JetBrains veröffentlicht wurde.
     Sie wurde mit dem Ziel entwickelt, eine moderne und verbesserte Alternative zu Java zu schaffen.
     In diesem Text werden die Unterschiede zwischen Java und Kotlin untersucht.
-    Es wird untersucht, inwieweit Kotlin eine geeignete Alternative zu Java darstellt und welche Vorteile Kotlin gegenüber Java bietet.
+    Es wird untersucht, inwieweit Kotlin eine geeignete Alternative zu Java darstellt und welche Vorteile Kotlin gegenüber Java bietet.\\
+    \\
     Zunächst werden beide Programmiersprachen kurz vorgestellt.
     Anschließend wird auf die Interoperabilität zwischen Java und Kotlin eingegangen.
     Dabei soll gezeigt werden, inwieweit sich Java und Kotlin in einem Projekt kombinieren lassen, bzw. wie bestehende Java-Projekte mit Kotlin weitergeführt werden können.
+
     Danach werden die unterschiedlichen Features der Sprachen untersucht.
     Zuerst gibt es eine kurze Übersicht über die Features die Kotlin von Java unterscheiden.
     Danach werden die wichtigsten Features genauer erläutert, also die Features die einen tatsächlichen Mehrwert bieten.
     Dabei wird hauptsächlich auf die Unterschiede zwischen Java und Kotlin eingegangen.
     Wie diese Features konkret genutzt werden kann nur am Rande besprochen werden, da dies den Umfang des Textes sprengen würde.
+
     Zum Schluss gibt es ein Fazit und eine kurze Zusammenfassung der Ergebnisse.
     Die Codebeispiele in diesem Text können auf GitHub unter \url{github.com/FSpruhs/kotlin-statt-java} gefunden werden und können alle, zu Testzwecken, selber ausgeführt werden.
 
@@ -471,29 +475,39 @@ public class NullHandlingExample {
 
     \subsection{Funktionale Programierung}
 
-    Funktionale Programierung hat in den letzten Jahren mehr an bedeutung gewonnen.
-    Ein grund dafür ist, dass entwicklung der CPU Geschwindigkeit nicht mehr so gross ist wie in den vorherigen Jahren.
-    Aus diesem Grund ist es wichtig geworden, das Programme paralleler ausgeführt werden.
-    So kann die ausführung auf mehrere CPU aufgeteilt werden.
-    Die Funktionale Programierung eigenet sich sehr gut um diese Parallelisierung zu erreichen~\cite[129]{kotlin-patterns}.
-    Kotlin wurde von anfang an mit dem Ziel entwickelt, eine moderne Programmiersprache zu schaffen, die sowohl objektorientierte als auch funktionale Programmierparadigmen unterstützt.
-    Java wurde als rein objektorientierte Sprache entwickelt und hat erst seit der Version 8 funktionale Features hinzugefügt.
-    Im folgenden werden einige der wichtigsten funktionalen Features von Kotlin vorgestellt und mit Java vergleichen, soweit diese dort vorhanden sind.\\
+    Die funktionale Programmierung hat in den letzten Jahren zunehmend an Bedeutung gewonnen.
+    Ein wesentlicher Grund dafür liegt in der stagnierenden Entwicklung der CPU-Geschwindigkeit.
+    Während in früheren Jahren die Leistungssteigerung hauptsächlich über höhere Taktfrequenzen erzielt wurde, liegt der Fokus heute stärker auf Mehrkernprozessoren.
+    Daraus ergibt sich die Notwendigkeit, Programme parallel auszuführen, um die vorhandenen Ressourcen effizient zu nutzen.
+
+    Die funktionale Programmierung eignet sich besonders gut für solche Parallelisierungskonzepte, da sie auf Zustandslosigkeit und Nebenwirkungsfreiheit basiert.
+    Diese Eigenschaften, vereinfachen und sicherer die Ausführung von Code~\cite[129]{kotlin-patterns}.
+
+    Kotlin wurde von Beginn an mit dem Ziel entwickelt, eine moderne Programmiersprache bereitzustellen, die sowohl objektorientierte als auch funktionale Paradigmen unterstützt.
+    Im Gegensatz dazu wurde Java ursprünglich als rein objektorientierte Sprache konzipiert und hat erst mit Version 8 funktionale Sprachmerkmale wie Lambdas und Streams eingeführt.
+
+    Im Folgenden werden einige der wichtigsten funktionalen Konzepte von Kotlin vorgestellt und mit entsprechenden Merkmalen in Java verglichen.
+    Ziel ist es, die Unterschiede sowie die jeweiligen Stärken beider Sprachen im funktionalen Kontext zu verdeutlichen.
 
     \subsubsection{Higher-Order-Functions}
-    Kotlin unterstützt Higher-Order-Functions, die Funktionen als Parameter akzeptieren oder Funktionen zurückgeben können.
-    Dabei sind in Kotlin Funktionen First-Class Citizens, was bedeutet, dass sie wie andere Datentypen behandelt werden können.
-    In Java können keine Funktionen übergeben werden.
-    Für die Funktionale Programierung in Java wird stattdessen die Funktionalität in einer Methode implementiert, sodass die Funktion zu einem Objekt mit einer Methode wird.
-    Lambda-Ausdrücke, bzw. Methoden/Konstruktorreferenzen geben eine kompakte Syntax ohne dabei eine extra Klasse mit einer Methode zu schreiben~\cite[820]{insel}.
-    In den folgenden zwei Code Beispielen ist eine Funktion implementiert die zwei Zahlen und eine Funktion entgegen nimmt.
-    Die entgegengenommene Funktion nimmt zwei Zahlen entgegen und gibt eine Zahl zurück.
-    In Listing~\ref{lst:kotlin-higher-order-function} ist diese Funktion in Kotlin und in Listing~\ref{lst:java-higher-order-function} in Java implementiert.
-    An der Kotlin implementierung ist zu sehen, dass keine Klasse für die implementierung Notwendig ist.
-    In der Java implementierung wird die Methode als statische methode einer Klasse implementiert.
-    Weiterhin ist in der Java implementierung die Funktion als Übergabe Parameter nur in Verbindung mit dem Funktionalen Interface BiFunction möglich.
-    Diese muss zuerst noch importiert werden.
-    In Kotlin ist solch ein Funktionales Interface nicht nötig.
+    Kotlin unterstützt Higher-Order Functions, also Funktionen, die andere Funktionen als Parameter entgegennehmen oder selbst Funktionen zurückgeben können.
+    Funktionen sind in Kotlin First-Class Citizens, was bedeutet, dass sie wie andere Datentypen behandelt und beispielsweise Variablen zugewiesen oder als Rückgabewerte verwendet werden können.
+
+    In Java hingegen können Funktionen nicht direkt übergeben werden, da Java ursprünglich keine funktionalen Konzepte vorsah.
+    Stattdessen wird die Funktionalität in einer Methode implementiert, sodass die Funktion letztlich Teil eines Objekts ist.
+    Mit der Einführung von Lambda-Ausdrücken sowie Methoden- und Konstruktorreferenzen in Java 8 wurde jedoch eine kompakte Syntax geschaffen, die es ermöglicht, Funktionalität ohne die explizite Definition einer zusätzlichen Klasse bereitzustellen~\cite[820]{insel}.
+
+    In den folgenden beiden Codebeispielen ist jeweils eine Funktion implementiert, die zwei Zahlen sowie eine weitere Funktion als Parameter entgegennimmt.
+    Diese übergebene Funktion nimmt ebenfalls zwei Zahlen entgegen und gibt eine einzelne Zahl zurück.
+
+    In \textit{Listing~\ref{lst:kotlin-higher-order-function}} ist diese Funktion in Kotlin dargestellt, während \textit{Listing~\ref{lst:java-higher-order-function}} die entsprechende Implementierung in Java zeigt.
+
+    An der Kotlin-Implementierung wird deutlich, dass keine zusätzliche Klasse erforderlich ist.
+    Die Funktion kann direkt als Parameter übergeben werden.
+    In der Java-Variante hingegen wird die Methode als statische Methode innerhalb einer Klasse definiert.
+    Zudem ist die Übergabe einer Funktion in Java nur über ein funktionales Interface, in diesem Fall \texttt{BiFunction}, möglich, welches zuvor importiert werden muss.
+
+    Kotlin bietet in diesem Zusammenhang eine deutlich elegantere und direktere Möglichkeit, funktionale Konzepte zu nutzen, da es keine zusätzlichen Konstrukte wie funktionale Interfaces benötigt.
 
     \begin{lstlisting}[language=Kotlin, caption={HigherOrderKotlin.kt}, label={lst:kotlin-higher-order-function}]
 package main.kotlin.com.spruhs
