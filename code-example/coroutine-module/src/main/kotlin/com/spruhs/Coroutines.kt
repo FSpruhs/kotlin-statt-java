@@ -22,15 +22,15 @@ fun coroutineTest() {
         }
     }
 
-    latch.await(10, TimeUnit.SECONDS)
+    latch.await(20, TimeUnit.SECONDS)
 
     println("Execution time: ${System.currentTimeMillis() - start} ms, Counter: ${counter.get()/2}")
 }
 
-fun threadTest() {
+fun threadTest(threadPoolSize: Int) {
     val counter = AtomicInteger()
 
-    val pool = Executors.newFixedThreadPool(5000)
+    val pool = Executors.newFixedThreadPool(threadPoolSize)
     val start = System.currentTimeMillis()
     for (i in 1..10_000) {
         pool.submit {
@@ -40,13 +40,15 @@ fun threadTest() {
         }
     }
 
-    pool.awaitTermination(20, TimeUnit.SECONDS)
     pool.shutdown()
+    pool.awaitTermination(20, TimeUnit.SECONDS)
 
-    println("Execution time: ${System.currentTimeMillis() - start} ms, Counter: ${counter.get()/2}")
+    println("ThreadPoolSize: $threadPoolSize, execution time: ${System.currentTimeMillis() - start} ms, Counter: ${counter.get()/2}")
 }
 
 fun main() {
-    //coroutineTest()
-    threadTest()
+    coroutineTest()
+    listOf(1, 10, 50, 100, 1_000, 2_500, 5_000, 10_000).forEach {
+        threadTest(it)
+    }
 }

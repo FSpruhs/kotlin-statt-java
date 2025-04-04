@@ -20,6 +20,7 @@
 \usepackage{color}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{hyperref}
 \addbibresource{literaturverzeichnis.bib}
 
 
@@ -90,7 +91,22 @@
 
 
     \section{Einleitung}
-
+    Java ist den meisten Entwicklern ein Begriff.
+    Es ist eine weit verbreitete Programmiersprache, die seit ihrer Einführung im Jahr 1995 eine zentrale Rolle in der Softwareentwicklung spielt.
+    Kotlin ist eine relativ neue Programmiersprache, die 2011 von JetBrains veröffentlicht wurde.
+    Sie wurde mit dem Ziel entwickelt, eine moderne und verbesserte Alternative zu Java zu schaffen.
+    In diesem Text werden die Unterschiede zwischen Java und Kotlin untersucht.
+    Es wird untersucht, inwieweit Kotlin eine geeignete Alternative zu Java darstellt und welche Vorteile Kotlin gegenüber Java bietet.
+    Zunächst werden beide Programmiersprachen kurz vorgestellt.
+    Anschließend wird auf die Interoperabilität zwischen Java und Kotlin eingegangen.
+    Dabei soll gezeigt werden, inwieweit sich Java und Kotlin in einem Projekt kombinieren lassen, bzw. wie bestehende Java-Projekte mit Kotlin weitergeführt werden können.
+    Danach werden die unterschiedlichen Features der Sprachen untersucht.
+    Zuerst gibt es eine kurze Übersicht über die Features die Kotlin von Java unterscheiden.
+    Danach werden die wichtigsten Features genauer erläutert, also die Features die einen tatsächlichen Mehrwert bieten.
+    Dabei wird hauptsächlich auf die Unterschiede zwischen Java und Kotlin eingegangen.
+    Wie diese Features konkret genutzt werden kann nur am Rande besprochen werden, da dies den Umfang des Textes sprengen würde.
+    Zum Schluss gibt es ein Fazit und eine kurze Zusammenfassung der Ergebnisse.
+    Die Codebeispiele in diesem Text können auf GitHub unter \url{github.com/FSpruhs/kotlin-statt-java} gefunden werden und können alle, zu Testzwecken, selber ausgeführt werden.
 
     \section{Kurzvorstellung Java}
 
@@ -522,7 +538,7 @@ System.out.println(sum); // Ausgabe 8
     Dabei wird bei dem Aufruf der Funktion die übergebene Funktion inline in den Code eingefügt.
     Dies wird durch das Schlüsselwort \texttt{inline} erreicht~\cite{kotlin-inline}.
 
-    \begin{lstlisting}[language=Kotlin, caption={HigherOrderJava.java}, label={kotlin-inline-function}]
+    \begin{lstlisting}[language=Kotlin, caption={InlineFunction.java}, label={kotlin-inline-function}]
 package main.kotlin.com.spruhs
 
 inline fun transformString(input: String, transform: (String) -> String): String {
@@ -536,6 +552,8 @@ fun main() {
     \end{lstlisting}
 
     \subsection{Threads und Coroutines}
+
+    \subsubsection{Laufzeitverhalten}
     In Java werden Threads verwendet, um parallele Ausführung zu ermöglichen.
     Ein Java Thread ist eine 1 zu 1 Abbildung auf einen Betriebssystem-Thread~\cite[940]{insel}.
     Das bedeutet, dass jeder Java-Thread direkt mit einem Betriebssystem-Thread verknüpft ist.
@@ -557,60 +575,115 @@ fun main() {
     Wenn eine Coroutine blockiert, wird der aktuelle Thread nicht blockiert.
     Dies ermöglicht eine bessere Auslastung der Systemressourcen und eine höhere Effizienz bei der Ausführung von parallelen Aufgaben~\cite[194]{kotlin-patterns}.
     \\
-    Coroutines:\\
-    Zeit: 305 ms\\
-    Speicher: 2 MB\\
-    Counter: 10.000\\
+    In Listing~\ref{lst:kotlin-coroutine} wird eine Schleife implementiert die 10.000 durchläuft und dabei einen Zähler um 1 erhöht und dann eine kurze Pause macht und dann nochmal den Zähler um 1 erhöht.
+    Diese Schleife ist einmal mit Coroutines und einmal mit Threads implementiert.
+    Dabei wird bei den Threads ein Thread-Pool verwendet.
+    Die Coroutinen werden ohne einen Thread-Pool gestartet.
+    Beide Methoden werden automatisch nach 20 Sekunden abgebrochen, oder sobald die schleife durchgelaufen ist.
+    Die Ausführungszeiten der Corotine und der Threads mit verschiedenen Thread-Pools sind in Tabelle~\ref{tab:coroutine-thread-pool} zusammengefasst.
+    An der Tabelle ist zu erkennen, dass die Coroutines deutlich schneller sind als die Threads.
+    Dies liegt daran, dass die Coroutines nicht an einen bestimmten System-Thread gebunden sind und der Overhead von Funktionsaufrufen und Kontextwechseln optimiert wird.
+    Sobald eine Coroutine blockiert, wird der aktuelle Thread nicht blockiert.
+    Dadurch können mehrere Coroutines gleichzeitig auf einem Thread ausgeführt werden.
+    Der Dispatcher kümmert sich darum, welche Coroutinen gerade blockiert sind und welche bearbeitet werden können.
+    Auch kann man an der Tabelle sehen, dass die die Ausführungszeit für mit 2.500 Threads schneller ist als mit 5.000 Threads.
+    Eigentlich sollte man davon ausgehen, dass die Ausführungszeit mit mehr Threads auch schneller ist.
+    Allerdings steigt mit der Anzahl der Threads auch der Overhead für die Verwaltung der Threads.
+    Ab 10000 Threads, also genau der Anzahl der durchläufe, kommt es sogar zu einem OutOfMemoryError.
+    An diesem Beispiel lässt sich gut erkennen, dass Coroutines eine leichtgwichtigere Alternative zu den Threads sind.
+    Die Messungen wurden auf einem Ubuntu 24.04 System mit 8 GB Arbeitsspeicher und einem AMD Ryzen 5 4500U x 6 Prozessor durchgeführt.
 
-    Thread-Pool 1:\\
-    Zeit: 20045 ms\\
-    Speicher: 5 MB\\
-    Counter: 200\\
+    \begin{lstlisting}[language=Kotlin, caption={Coroutines.kt}, label={lst:kotlin-coroutine}]
+package main.kotlin.com.spruhs
 
-    Thread-Pool 10:\\
-    Zeit: 20031 ms\\
-    Speicher: 4 MB\\
-    Counter: 1.995\\
+import kotlinx.coroutines.*
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
 
-    Thread-Pool 50:\\
-    Zeit: 20056 ms\\
-    Speicher: 4 MB\\
-    Counter: 9.975\\
+fun coroutineTest() {
+    val latch = CountDownLatch(10_000)
+    val counter = AtomicInteger()
 
-    Thread-Pool 100:\\
-    Zeit: 20073 ms\\
-    Speicher: 4 MB\\
-    Counter: 10.000\\
+    val start = System.currentTimeMillis()
+    runBlocking {
+        for (i in 1..10_000) {
+            launch {
+                counter.incrementAndGet()
+                delay(100)
+                counter.incrementAndGet()
+                latch.countDown()
+            }
+        }
+    }
 
-    Thread-Pool 500:\\
-    Zeit: 20204 ms\\
-    Speicher: 5 MB\\
-    Counter: 10.000\\
+    latch.await(20, TimeUnit.SECONDS)
 
-    Thread-Pool 1.000:\\
-    Zeit: 20263 ms\\
-    Speicher: 4 MB\\
-    Counter: 10.000\\
+    println("Execution time: ${System.currentTimeMillis() - start} ms, Counter: ${counter.get()/2}")
+}
 
-    Thread-Pool 5.000:\\
-    Zeit: 21041 ms\\
-    Speicher: 5 MB\\
-    Counter: 10.000\\
+fun threadTest(threadPoolSize: Int) {
+    val counter = AtomicInteger()
 
-    Thread-Pool 10.000:\\
-    Zeit: OutOfMemoryError\\
-    Speicher:
-    Counter:
+    val pool = Executors.newFixedThreadPool(threadPoolSize)
+    val start = System.currentTimeMillis()
+    for (i in 1..10_000) {
+        pool.submit {
+            counter.incrementAndGet()
+            Thread.sleep(100)
+            counter.incrementAndGet()
+        }
+    }
 
+    pool.shutdown()
+    pool.awaitTermination(20, TimeUnit.SECONDS)
 
+    println("ThreadPoolSize: $threadPoolSize, execution time: ${System.currentTimeMillis() - start} ms, Counter: ${counter.get()/2}")
+}
+
+fun main() {
+    coroutineTest()
+    listOf(1, 10, 50, 100, 1_000, 2_500, 5_000, 10_000).forEach {
+        threadTest(it)
+    }
+}
+    \end{lstlisting}
+
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+             & \textbf{Ausführungszeit} & \textbf{Counter}\\
+            \hline
+            Coroutines & 396 ms & 10.000   \\
+            \hline
+            Thread-Pool 1 & 20.045 ms  & 200  \\
+            \hline
+            Thread-Pool 10 & 20.031 ms  & 1.995  \\
+            \hline
+            Thread-Pool 50 & 20.056 ms  & 9.975  \\
+            \hline
+            Thread-Pool 100 & 10.071 ms  & 10.000  \\
+            \hline
+            Thread-Pool 1.000 & 1.290 ms  & 10.000  \\
+            \hline
+            Thread-Pool 2.500 & 1.021 ms  & 10.000  \\
+            \hline
+            Thread-Pool 5.000 & 1.569 ms  & 10.000  \\
+            \hline
+            Thread-Pool 10.000 & OutOfMemoryError  &   \\
+            \hline
+        \end{tabular}
+        \caption{Ausführungszeiten von Coroutines und Threads}
+        \label{tab:coroutine-thread-pool}
+    \end{table}
 
     \printbibliography[
         heading=bibintoc,
         title={Literaturverzeichnis}
     ]
     \appendix
-
-
     \section{Anhang}
 
     \begin{figure}[h]
