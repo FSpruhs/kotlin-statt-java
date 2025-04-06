@@ -13,5 +13,7 @@
         <module>kotlin-module</module>
         <module>nullable-module</module>
         <module>coroutine-module</module>
+        <module>functional-module</module>
+        <module>syntax-module</module>
     </modules>
 </project>

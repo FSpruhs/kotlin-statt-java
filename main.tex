@@ -693,6 +693,164 @@ fun main() {
         \label{tab:coroutine-thread-pool}
     \end{table}
 
+    \subsection{Syntax verbesserungen}
+    Kotlin bietet eine Vielzahl von Features die dafür sorgen, dass der Code kürzer ist und das Boilerplate Code reduziert wird.
+    Die damit umsetzbare Funktionalitäten lassen sich grundsätzlich auch in Java Code implementieren, erfordern da aber deutlich mehr Boilerplate Code und sind schwieriger zu lesen.
+    Damit könnte man diese Features eher als Syntax-Sugar bezeichnen, aber in der Summe bieten diese Features eine deutliche Verbesserung gegenüber Java.
+    Die wichtigsten Features werden im Folgenden vorgestellt.
+
+    \subsubsection{Extension Functions}
+    Kotlin bietet die Möglichkeit, bestehende Klassen um neue Funktionen zu erweitern, ohne diese Klassen tatsächlich zu ändern.
+    Die funktion kann dann wie eine normale Methode aufgerufen werden.
+    Mit Extension Functions können nicht nur eigene Klassen erweitert werden, sondern auch Klassen aus externen Bibliotheken.
+    In Listing~\ref{lst:kotlin-extension-function} wird eine Extension-Funktion \texttt{double} für die Klasse \texttt{String} implementiert.
+    Um eine Extension Function zu implementieren, wird der Typ der Klasse, die erweitert werden soll, vor dem Funktionsnamen angegeben und mit einem Punkt getrennt.
+    Diese Funktion verdoppelt den Inhalt des Strings und gibt ihn zurück.
+    Mit dem Keyword \texttt{this} kann auf die aktuelle Instanz zugegriffen werden.
+    In der \texttt{main}-Methode wird die Funktion zweimal aufgerufen und das Ergebnis ausgegeben.
+    In Zeile 8 sieht man sogar, wie schön in in Kotlin die Extension Function direkt von dem String aufgerufen werden kann.
+    In Java kann man bestehende Klassen auch erweitern.
+    Dazu kann zum Beispiel das Decorator-Pattern verwendet werden oder von der erweiternden Klasse geerbt werden.
+    Dies führt aber zu deutlich mehr Boilerplate Code und ist nicht so elegant wie in Kotlin~\cite{kotlin-extensions}.
+
+
+    \begin{lstlisting}[language=Kotlin, caption={ExtensionFunction.kt}, label={lst:kotlin-extension-function}]
+package main.kotlin.com.spruhs
+
+fun String.double(): String {
+    return "$this $this"
+}
+
+fun main() {
+    val name = "Hello World!".double()
+    println(name.double()) // Output: Hello World! Hello World! Hello World! Hello World!
+}
+    \end{lstlisting}
+
+    \subsubsection{Named Parameters und Properties}
+    Named Parameters und Properties sind zwei Features die oft zusammen verwendet werden.
+    Bei Named Parameters handelt es sich um eine Möglichkeit, Parameter in einer Funktion oder einem Konstruktor benennen zu können.
+    Dies ermöglicht es, die Parameter in beliebiger Reihenfolge anzugeben und nur die Parameter zu übergeben, die tatsächlich benötigt werden.
+    Properties können verwendet werden um einer Klasse Default Attribute hinzuzufügen.
+    In Listing~\ref{lst:kotlin-builder-pattern} wird am Beispiel des Builder Pattern gezeigt, wie Named Parameters und Properties zusammen verwendet werden können.
+    Bei dem Builder Pattern handelt es sich um eines der klassischen Patterns von der Gang of Four das häufig verwendet~\cite{gang-of-four}.
+    In Kotlin wird das Builder Pattern durch die Verwendung von Named Parameters und Properties vereinfacht.
+    In der \texttt{data class} \texttt{User} werden die Attribute \texttt{firstName}, \texttt{lastName}, \texttt{titles} und \texttt{age} definiert.
+    Diese Attribute sind alle optional und haben Default-Werte.
+    In der \texttt{main}-Methode werden zwei Objekt der Klasse \texttt{User} erstellt.
+    Dabei hat das erste Objekt alle Attribute und das zweite Objekt nur die Attribute \texttt{firstName} und \texttt{lastName}~\cite[46]{kotlin-patterns}.
+    Eine Mögliche implementierung in Java ist in Listing~\ref{lst:java-builder-pattern} zu sehen.
+    Diese Implementierung ist deutlich länger und unübersichtlicher als die Kotlin-Implementierung.
+
+    \begin{lstlisting}[language=Kotlin, caption={Builder.kt}, label={lst:kotlin-builder-pattern}]
+package main.kotlin.com.spruhs
+
+data class User(
+    val firstName: String = "",
+    val lastName: String = "",
+    val titles: List<String> = emptyList(),
+    val age: Int? = null,
+)
+
+fun main() {
+    val user1 = User(
+        firstName = "John",
+        lastName = "Doe",
+        titles = listOf("Mr.", "Dr."),
+        age = 30,
+    )
+
+    val user2 = User(
+        firstName = "Jane",
+        lastName = "Smith",
+    )
+}
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Java, caption={JavaUser.kt}, label={lst:java-builder-pattern}]
+        package main.kotlin.com.spruhs;
+
+import java.util.List;
+
+public class JavaUser {
+    private String firstName;
+    private String lastName;
+    private List<String> titles;
+    private int age;
+
+    private JavaUser(Builder builder) {
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.titles = builder.titles;
+        this.age = builder.age;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private String firstName;
+        private String lastName;
+        private List<String> titles;
+        private int age;
+
+        public Builder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public Builder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Builder titles(List<String> titles) {
+            this.titles = titles;
+            return this;
+        }
+
+        public Builder age(int age) {
+            this.age = age;
+            return this;
+        }
+
+        public JavaUser build() {
+            return new JavaUser(this);
+        }
+    }
+
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public List<String> getTitles() { return titles; }
+    public int getAge() { return age; }
+}
+    \end{lstlisting}
+
+    \subsubsection{Infix Notation}
+    Mit der Infix Notation kann man den Aufruf von Extension oder Member Funcionen kürzer schreiben.
+    Vorraussetung ist, dass die Funktionen nur einen Parameter, ohne Default Wert, hat.
+    In Listing~\ref{lst:kotlin-infix-notation} wird die mit dem Keyword infix die Klasse String um die Funktion \texttt{isLongerThan} erweitert.
+    Diese Funktion bekommt einen anderen String übergeben und prüft, ob dieser String kürzer ist als der aktuelle String.
+    In Zeile 10 wird die Infix Notation verwendet und diese Fuktion aufgerufen, ohne dabei Klammern und Punkt zu benutzten.
+    In Zeile 11 passiert das gleiche aber ohne die Infix Notation.
+    Beide Aufrufe machen Inhaltlich das gleiche~\cite{kotlin-infix-notation}.
+
+    \begin{lstlisting}[language=Kotlin, caption={InfixNotation.kt}, label={lst:kotlin-infix-notation}]
+package main.kotlin.com.spruhs
+
+infix fun String.isLongerThan(other: String): Boolean {
+    return this.length > other.length
+}
+
+fun main() {
+    val hello = "Hello"
+    val world = "World!"
+    println(hello isLongerThan world) // Output: false
+    println(hello.isLongerThan(world)) // Output: false
+}
+    \end{lstlisting}
+
     \printbibliography[
         heading=bibintoc,
         title={Literaturverzeichnis}
