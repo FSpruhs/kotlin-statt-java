@@ -1,6 +1,6 @@
 package main.kotlin.com.spruhs
 
-data class User(
+class User(
     val firstName: String = "",
     val lastName: String = "",
     val titles: List<String> = emptyList(),
