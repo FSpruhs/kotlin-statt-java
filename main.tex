@@ -178,7 +178,7 @@
     Kotlin wurde 2011 von der Firma JetBrains veröffentlicht.
     Ziel der Entwicklung war es, eine verbesserte Alternative zu Java zu schaffen.
     Schon an der Namensgebung kann man die nähe zu Java erkennen.
-    Der Name Java bezieht sich auf eine Indonesiche Insel.
+    Der Name Java bezieht sich auf eine Indonesische Insel.
     Der Namensgeber von Kotlin ist eine russische Insel vor St. Petersburg.\\
     \\
     Obwohl Java nur etwa 15 Jahre älter als Kotlin ist, stellt dies in der schnelllebigen Welt der Softwareentwicklung eine erhebliche Zeitspanne dar.
@@ -611,44 +611,45 @@ fun main() {
     \subsection{Threads und Coroutines}
 
     \subsubsection{Laufzeitverhalten}
-    In Java werden Threads verwendet, um parallele Ausführung zu ermöglichen.
-    Ein Java Thread ist eine 1 zu 1 Abbildung auf einen Betriebssystem-Thread~\cite[940]{insel}.
-    Das bedeutet, dass jeder Java-Thread direkt mit einem Betriebssystem-Thread verknüpft ist.
-    Zu jedem Thread gehört dann ein eigener Stack und ein eigener Speicherbereich.
-    Threads sind in Java relativ schwergewichtig und benötigen viel Overhead.
-    Dadurch kann Java nur eine begrenzte Anzahl von Threads gleichzeitig ausführen.
-    Zu viele Threads würden sonst sehr schnell zu einem Mangel an Systemressourcen führen.
-    Dieses Problem lässt sich in Java mit Thread-Pools lösen.
-    Ein Thread-Pool ist eine Sammlung von Threads, die wiederverwendet werden können, um Aufgaben auszuführen.
-    Dabei ist die Anzahl der Threads im Pool begrenzt.
-    Wenn ein Thread im Pool blockiert, dann kann dafür kein neuer Thread in den Pool aufgenommen werden.
-    Es können erst wieder neue Threads in den Pool aufgenommen werden, wenn ein Thread abgeschlossen ist und der Pool wieder Platz hat.
-    Dies führt zu einer nicht optimalen Auslastung der Systemressourcen.\\
-    Kotlin bietet eine Alternative zu Threads in Form von Coroutines.
-    Coroutines sind leichtgewichtige Threads, die eine einfachere und effizientere Möglichkeit bieten, parallele und asynchrone Programmierung zu implementieren.
-    Coroutines sind nicht an einen bestimmten System Thread gebunden und können auf verschiedenen Threads ausgeführt werden.
-    Die Verwaltung der Coroutines erfolgt durch den Kotlin-Compiler, der den Overhead von Funktionsaufrufen und Kontextwechseln optimiert.
-    Dabei können Coroutines in einem Thread-Pool ausgeführt werden, ohne dass die Anzahl der Threads im Pool begrenzt ist.
-    Wenn eine Coroutine blockiert, wird der aktuelle Thread nicht blockiert.
-    Dies ermöglicht eine bessere Auslastung der Systemressourcen und eine höhere Effizienz bei der Ausführung von parallelen Aufgaben~\cite[194]{kotlin-patterns}.
+
+    In modernen Anwendungen, insbesondere in solchen mit hoher Benutzerinteraktion oder paralleler Datenverarbeitung, spielt effiziente Nebenläufigkeit eine zentrale Rolle.
+    Während sich funktionale Programmierung gut eignet, um nebenläufige Logik deklarativ und fehlerarm zu beschreiben, reicht dies allein nicht aus, um die tatsächliche Ausführung effizient zu gestalten.\\
     \\
-    In Listing~\ref{lst:kotlin-coroutine} wird eine Schleife implementiert die 10.000 durchläuft und dabei einen Zähler um 1 erhöht und dann eine kurze Pause macht und dann nochmal den Zähler um 1 erhöht.
-    Diese Schleife ist einmal mit Coroutines und einmal mit Threads implementiert.
-    Dabei wird bei den Threads ein Thread-Pool verwendet.
-    Die Coroutinen werden ohne einen Thread-Pool gestartet.
-    Beide Methoden werden automatisch nach 20 Sekunden abgebrochen, oder sobald die schleife durchgelaufen ist.
-    Die Ausführungszeiten der Corotine und der Threads mit verschiedenen Thread-Pools sind in Tabelle~\ref{tab:coroutine-thread-pool} zusammengefasst.
-    An der Tabelle ist zu erkennen, dass die Coroutines deutlich schneller sind als die Threads.
-    Dies liegt daran, dass die Coroutines nicht an einen bestimmten System-Thread gebunden sind und der Overhead von Funktionsaufrufen und Kontextwechseln optimiert wird.
-    Sobald eine Coroutine blockiert, wird der aktuelle Thread nicht blockiert.
-    Dadurch können mehrere Coroutines gleichzeitig auf einem Thread ausgeführt werden.
-    Der Dispatcher kümmert sich darum, welche Coroutinen gerade blockiert sind und welche bearbeitet werden können.
-    Auch kann man an der Tabelle sehen, dass die die Ausführungszeit für mit 2.500 Threads schneller ist als mit 5.000 Threads.
-    Eigentlich sollte man davon ausgehen, dass die Ausführungszeit mit mehr Threads auch schneller ist.
-    Allerdings steigt mit der Anzahl der Threads auch der Overhead für die Verwaltung der Threads.
-    Ab 10000 Threads, also genau der Anzahl der durchläufe, kommt es sogar zu einem OutOfMemoryError.
-    An diesem Beispiel lässt sich gut erkennen, dass Coroutines eine leichtgwichtigere Alternative zu den Threads sind.
-    Die Messungen wurden auf einem Ubuntu 24.04 System mit 8 GB Arbeitsspeicher und einem AMD Ryzen 5 4500U x 6 Prozessor durchgeführt.\\
+    In Java werden Threads verwendet, um parallele Ausführung zu ermöglichen.
+    Ein Java-Thread ist eine 1:1-Abbildung auf einen Betriebssystem-Thread~\cite[940]{insel}.
+    Das bedeutet, dass jeder Java-Thread direkt mit einem nativen Thread des Betriebssystems verknüpft ist.
+    Jedem Thread wird dabei ein eigener Stack und Speicherbereich zugewiesen.
+    Da Threads relativ schwergewichtig sind und mit nicht unerheblichem Overhead verbunden sind, ist die Anzahl parallel laufender Threads begrenzt.
+    Eine zu hohe Thread-Anzahl kann schnell zu einem Mangel an Systemressourcen führen.\\
+    \\
+    Ein gängiger Lösungsansatz in Java sind sogenannte Thread-Pools.
+    Dabei handelt es sich um eine feste Anzahl von Threads, die wiederverwendet werden, um Aufgaben auszuführen.
+    Wenn ein Thread im Pool blockiert, kann kein weiterer hinzugefügt werden, bis ein anderer Thread wieder freigegeben wird.
+    Dies kann zu einer suboptimalen Auslastung der Systemressourcen führen.\\
+    \\
+    Kotlin bietet mit Coroutines eine leichtgewichtigere Alternative.
+    Coroutines ermöglichen eine effizientere und zugleich einfachere Umsetzung von paralleler und asynchroner Programmierung.
+    Sie sind nicht an einen bestimmten System-Thread gebunden und können flexibel zwischen Threads wechseln.
+    Die Verwaltung der Coroutines übernimmt der Kotlin-Compiler in Verbindung mit dem Dispatcher, der auch den Overhead von Kontextwechseln reduziert.
+    Selbst bei einer blockierenden Coroutine bleibt der zugrunde liegende Thread frei und kann andere Coroutines verarbeiten.
+    So lässt sich eine deutlich bessere Ausnutzung der verfügbaren Ressourcen erzielen~\cite[194]{kotlin-patterns}.\\
+    \\
+    In Listing~\ref{lst:kotlin-coroutine} wird eine Schleife mit 10.000 Iterationen implementiert.
+    In jeder Iteration wird ein Zähler erhöht, eine kurze Pause eingelegt und der Zähler erneut erhöht.
+    Diese Schleife wird sowohl mit Coroutines als auch mit Threads (mittels Thread-Pool) umgesetzt.
+    Beide Varianten werden nach spätestens 20 Sekunden beendet oder sobald alle Iterationen abgeschlossen sind.\\
+    \\
+    Die Ausführungszeiten sind in Tabelle~\ref{tab:coroutine-thread-pool} dargestellt.
+    Hier zeigt sich deutlich der Effizienzvorteil von Coroutines.
+    Sie sind deutlich schneller als Threads, da sie ressourcenschonender arbeiten und nicht direkt an System-Threads gebunden sind.
+    Mehrere Coroutines können gleichzeitig auf einem Thread laufen, da blockierende Operationen den Thread nicht blockieren.
+    Der Dispatcher übernimmt das Scheduling und sorgt dafür, dass nur aktive Coroutines weiter ausgeführt werden.\\
+    \\
+    Ab 10.000 Threads, also genau der Anzahl an Iterationen, kommt es sogar zu einem \texttt{OutOfMemoryError}.\\
+    \\
+    Dieses Beispiel verdeutlicht, dass Coroutines eine deutlich leichtgewichtigere und skalierbarere Alternative zu klassischen Threads darstellen.
+    Die Messungen wurden auf einem Ubuntu 24.04 System mit 8~GB RAM und einem AMD Ryzen 5 4500U (6 Kerne) durchgeführt.
+    Das Ergebnis ist auch in Abbildung~\ref{fig:coroutines-threads} zu sehen.\\
     \\
 
     \begin{lstlisting}[language=Kotlin, caption={Coroutines.kt}, label={lst:kotlin-coroutine}]
@@ -714,21 +715,21 @@ fun main() {
             \hline
              & \textbf{Ausführungszeit} & \textbf{Counter}\\
             \hline
-            Coroutines & 396 ms & 10.000   \\
+            Coroutines & 410 ms & 10.000   \\
             \hline
-            Thread-Pool 1 & 20.045 ms  & 200  \\
+            Thread-Pool 1 & 20.011 ms  & 199  \\
             \hline
-            Thread-Pool 10 & 20.031 ms  & 1.995  \\
+            Thread-Pool 10 & 20.007 ms  & 1.995  \\
             \hline
-            Thread-Pool 50 & 20.056 ms  & 9.975  \\
+            Thread-Pool 50 & 20.008 ms  & 9.975  \\
             \hline
-            Thread-Pool 100 & 10.071 ms  & 10.000  \\
+            Thread-Pool 100 & 10.015 ms  & 10.000  \\
             \hline
-            Thread-Pool 1.000 & 1.290 ms  & 10.000  \\
+            Thread-Pool 1.000 & 1.048 ms  & 10.000  \\
             \hline
-            Thread-Pool 2.500 & 1.021 ms  & 10.000  \\
+            Thread-Pool 2.500 & 574 ms  & 10.000  \\
             \hline
-            Thread-Pool 5.000 & 1.569 ms  & 10.000  \\
+            Thread-Pool 5.000 & 562 ms  & 10.000  \\
             \hline
             Thread-Pool 10.000 & OutOfMemoryError  &   \\
             \hline
@@ -977,6 +978,13 @@ fun main() {
         \includegraphics[width=0.8\textwidth]{pictures/Screenshot 2025-03-11 at 22-21-04 TIOBE Index - TIOBE}
         \caption{Tiobe Index März 2025 vom 11.03.2025}
         \label{fig:tiobe-kotlin-2025}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{pictures/Bildschirmfoto vom 2025-04-08 20-09-18}
+        \caption{Ausführung Coroutines und Threads}
+        \label{fig:coroutines-threads}
     \end{figure}
 
 
