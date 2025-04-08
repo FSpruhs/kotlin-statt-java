@@ -218,7 +218,6 @@
     \\
 
     \begin{lstlisting}[language=Kotlin, caption={KotlinGreeter.kt}]
-package main.java.com.spruhs
 
 class ClassGreeter {
     fun greet() {
@@ -235,7 +234,6 @@ class StaticGreeter {
         }
     }
 }
-
 object SingletonGreeter {
     fun greet() {
         println("Hello from kotlin singleton method!")
@@ -279,7 +277,6 @@ public static void main(String[] args) {
     \\
 
     \begin{lstlisting}[language=Java, caption={JavaClassMethodGreeter.java}]
-package main.kotlin.com.spruhs;
 
 public class JavaClassMethodGreeter {
     public void greet() {
@@ -289,7 +286,6 @@ public class JavaClassMethodGreeter {
     \end{lstlisting}
 
     \begin{lstlisting}[language=Java, caption={JavaStaticGreeter.java}]
-package main.kotlin.com.spruhs;
 
 public class JavaStaticGreeter {
     public static void greet() {
@@ -300,7 +296,6 @@ public class JavaStaticGreeter {
     \end{lstlisting}
 
     \begin{lstlisting}[language=Kotlin, caption={Main.kt}]
-package main.kotlin.com.spruhs
 
 fun main() {
     val javaClassMethodGreeter = JavaClassMethodGreeter()
@@ -451,35 +446,34 @@ fun main() {
     \\
 
     \begin{lstlisting}[language=Kotlin, caption={KotlinNullSafety.kt}, label={lst:kotlin-null-safety}]
-    fun testNullSafety() {
-        var nullableVariable: String?
-        var nonNullableVariable: String
 
-        nullableVariable = null // Kein Compiler Fehler
-        nonNullableVariable = null // Compiler Fehler
-    }
+fun testNullSafety() {
+    var nullableVariable: String?
+    var nonNullableVariable: String
+
+    nullableVariable = null // Kein Compiler Fehler
+    nonNullableVariable = null // Compiler Fehler
+}
     \end{lstlisting}
 
     \begin{lstlisting}[language=Kotlin, caption={KotlinUser.kt}, label={lst:kotlin-user-null-safety}]
-        package main.kotlin.com.spruhs
 
-        fun getUserName(user: KotlinUser?): String {
-        return user?.name ?: "Unbekannter Benutzer"
-        }
+fun getUserName(user: KotlinUser?): String {
+    return user?.name ?: "Unbekannter Benutzer"
+}
 
-        data class KotlinUser(val name: String)
+data class KotlinUser(val name: String)
 
-        fun main() {
-        val user1: KotlinUser = KotlinUser("Fabian")
-        val user2: KotlinUser? = null
+fun main() {
+    val user1: KotlinUser = KotlinUser("Fabian")
+    val user2: KotlinUser? = null
 
-        println(getUserName(user1)) // Ausgabe: Fabian
-        println(getUserName(user2)) // Ausgabe: Unbekannter Benutzer
-        }
+    println(getUserName(user1)) // Ausgabe: Fabian
+    println(getUserName(user2)) // Ausgabe: Unbekannter Benutzer
+}
     \end{lstlisting}
 
     \begin{lstlisting}[language=Java, caption={NullHandlingExample.java}, label={lst:java-user-null-safety}]
-    package main.kotlin.com.spruhs;
 
 class JavaUser {
     private String name;
@@ -495,7 +489,8 @@ class JavaUser {
 
 public class NullHandlingExample {
     public static String getUserName(JavaUser user) {
-        return (user != null && user.getName() != null) ? user.getName() : "Unbekannter Benutzer";
+        return (user != null && user.getName() != null)
+                ? user.getName() : "Unbekannter Benutzer";
     }
 
     public static void main(String[] args) {
@@ -548,33 +543,31 @@ public class NullHandlingExample {
     \\
 
     \begin{lstlisting}[language=Kotlin, caption={HigherOrderKotlin.kt}, label={lst:kotlin-higher-order-function}]
-package main.kotlin.com.spruhs
 
 fun operateOnNumbers(a: Int, b: Int, operation: (Int, Int) -> Int): Int {
-return operation(a, b)
+    return operation(a, b)
 }
 
 fun main() {
-val sum = operateOnNumbers(5, 3) { x, y -> x + y }
-println(sum) // Ausgabe 8
+    val sum = operateOnNumbers(5, 3) { x, y -> x + y }
+    println(sum) // Ausgabe 8
 }
     \end{lstlisting}
 
     \begin{lstlisting}[language=Java, caption={HigherOrderJava.java}, label={lst:java-higher-order-function}]
-package main.kotlin.com.spruhs;
 
 import java.util.function.BiFunction;
 
 public class HigherOrderJava {
 
-public static int operateOnNumbers(int a, int b, BiFunction<Integer, Integer, Integer> operation) {
-return operation.apply(a, b);
-}
+    public static int operateOnNumbers(int a, int b, BiFunction<Integer, Integer, Integer> operation) {
+        return operation.apply(a, b);
+    }
 
-public static void main(String[] args) {
-int sum = operateOnNumbers(5, 3, (x, y) -> x + y);
-System.out.println(sum); // Ausgabe 8
-}
+    public static void main(String[] args) {
+        int sum = operateOnNumbers(5, 3, (x, y) -> x + y);
+        System.out.println(sum); // Ausgabe 8
+    }
 }
     \end{lstlisting}
 
@@ -596,9 +589,11 @@ System.out.println(sum); // Ausgabe 8
     \\
 
     \begin{lstlisting}[language=Kotlin, caption={InlineFunction.java}, label={lst:kotlin-inline-function}]
-package main.kotlin.com.spruhs
 
-inline fun transformString(input: String, transform: (String) -> String): String {
+inline fun transformString(
+    input: String,
+    transform: (String) -> String
+): String {
     return transform(input)
 }
 
@@ -645,6 +640,9 @@ fun main() {
     Mehrere Coroutines können gleichzeitig auf einem Thread laufen, da blockierende Operationen den Thread nicht blockieren.
     Der Dispatcher übernimmt das Scheduling und sorgt dafür, dass nur aktive Coroutines weiter ausgeführt werden.\\
     \\
+    Umso mehr Threads genutzt werden, desto schneller wird die Ausführungszeit.
+    Zwischen 2.500 und 5.000 Threads ist die Ausführungszeit fast gleich.
+    Dafür ist aber der Speicherverbrauch deutlich höher.
     Ab 10.000 Threads, also genau der Anzahl an Iterationen, kommt es sogar zu einem \texttt{OutOfMemoryError}.\\
     \\
     Dieses Beispiel verdeutlicht, dass Coroutines eine deutlich leichtgewichtigere und skalierbarere Alternative zu klassischen Threads darstellen.
@@ -653,7 +651,6 @@ fun main() {
     \\
 
     \begin{lstlisting}[language=Kotlin, caption={Coroutines.kt}, label={lst:kotlin-coroutine}]
-package main.kotlin.com.spruhs
 
 import kotlinx.coroutines.*
 import java.util.concurrent.CountDownLatch
@@ -737,30 +734,122 @@ fun main() {
         \caption{Ausführungszeiten von Coroutines und Threads}
         \label{tab:coroutine-thread-pool}
     \end{table}
+    
+    \subsubsection{Channels}
+    Ein zentrales Merkmal der Kotlin-Coroutines ist die Unterstützung für Channels, die eine einfache Möglichkeit bieten, Daten zwischen Coroutines zu übermitteln.
+    Channels ermöglichen es, dass zwei oder mehr Coroutines effizient und nebenläufig miteinander kommunizieren können.
+    Dabei müssen keine Synchronisationsmechanismen wie Locks oder Shared Mutable State verwendet werden.
+    Dies vereinfacht die Entwicklung nebenläufiger Anwendungen erheblich und trägt zur Fehlerminimierung bei~\cite[208]{kotlin-patterns}.\\
+    \\
+    Channels lassen sich in Kotlin wie Queues verwenden.
+    Eine Coroutine sendet Daten in den Channel, eine andere empfängt sie.\\
+    \\
+    In Listing~\ref{lst:kotlin-channels} wird ein Channel<Int> erstellt, in den eine Coroutine Zahlen von 1 bis 5 sendet.
+    Eine zweite Coroutine empfängt diese Zahlen und gibt sie aus.
+    Die Nutzung von channel.close() signalisiert, dass keine weiteren Werte mehr folgen, sodass die empfangende Coroutine korrekt beendet werden kann.\\
+    \\
+    In Listing~\ref{lst:java-channels} wird das gleiche Beispiel in Java umgesetzt.
+    Hier gibt es jedoch keine native Unterstützung für Channels, wie Kotlin sie bietet.
+    Um ein ähnliches Verhalten zu erreichen, kann eine BlockingQueue verwendet werden, wobei jedoch auf die Synchronisation und die korrekte Beendigung selbst geachtet werden muss.
+    In der Java-Version müssen eigene Threads erzeugt werden, und zur Signalisierung des Endes dient ein spezieller Wert (-1), da es keine eingebaute close()-Funktion wie bei Kotlin-Channels gibt.\\
+    \\
+
+    \begin{lstlisting}[language=Kotlin, caption={Channels.kt}, label={lst:kotlin-channels}]
+
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
+
+fun channelsExample() = runBlocking {
+    val channel = Channel<Int>()
+
+    launch {
+        for (x in 1..5) {
+            println("Send $x")
+            channel.send(x)
+        }
+        channel.close()
+    }
+
+    launch {
+        for (y in channel) {
+            println("Receive $y")
+        }
+    }
+}
+
+fun main() {
+    channelsExample()
+}
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Java, caption={JavaChannels.java}, label={lst:java-channels}]
+
+import java.util.concurrent.*;
+
+public class JavaChannels {
+    public static void main(String[] args) throws InterruptedException {
+        BlockingQueue<Integer> queue = new LinkedBlockingQueue<>();
+
+        Thread producer = new Thread(() -> {
+            try {
+                for (int i = 1; i <= 5; i++) {
+                    System.out.println("Sende " + i);
+                    queue.put(i);
+                }
+                queue.put(-1);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+
+        Thread consumer = new Thread(() -> {
+            try {
+                while (true) {
+                    int value = queue.take();
+                    if (value == -1) break;
+                    System.out.println("Receive " + value);
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+
+        producer.start();
+        consumer.start();
+        producer.join();
+        consumer.join();
+    }
+}
+    \end{lstlisting}
 
     \subsection{Syntax verbesserungen}
-    Kotlin bietet eine Vielzahl von Features die dafür sorgen, dass der Code kürzer ist und das Boilerplate Code reduziert wird.
-    Die damit umsetzbare Funktionalitäten lassen sich grundsätzlich auch in Java Code implementieren, erfordern da aber deutlich mehr Boilerplate Code und sind schwieriger zu lesen.
-    Damit könnte man diese Features eher als Syntax-Sugar bezeichnen, aber in der Summe bieten diese Features eine deutliche Verbesserung gegenüber Java.
-    Die wichtigsten Features werden im Folgenden vorgestellt.
+    Kotlin bietet eine Vielzahl von Sprachfeatures, die darauf abzielen, den Code kompakter, lesbarer und weniger fehleranfällig zu machen.
+    Viele dieser Konzepte lassen sich grundsätzlich auch in Java umsetzen, erfordern dort jedoch deutlich mehr Boilerplate-Code und führen zu weniger übersichtlichem Quelltext.
+    Auch wenn man einige dieser Features als „Syntax-Sugar“ bezeichnen könnte, ergibt sich durch deren Zusammenspiel ein spürbarer Mehrwert in Bezug auf Produktivität und Wartbarkeit.
+    Im Folgenden werden die wichtigsten dieser Sprachfeatures vorgestellt und ihre Vorteile gegenüber Java erläutert.
 
     \subsubsection{Extension Functions}
-    Kotlin bietet die Möglichkeit, bestehende Klassen um neue Funktionen zu erweitern, ohne diese Klassen tatsächlich zu ändern.
-    Die funktion kann dann wie eine normale Methode aufgerufen werden.
-    Mit Extension Functions können nicht nur eigene Klassen erweitert werden, sondern auch Klassen aus externen Bibliotheken.
-    In Listing~\ref{lst:kotlin-extension-function} wird eine Extension-Funktion \texttt{double} für die Klasse \texttt{String} implementiert.
-    Um eine Extension Function zu implementieren, wird der Typ der Klasse, die erweitert werden soll, vor dem Funktionsnamen angegeben und mit einem Punkt getrennt.
-    Diese Funktion verdoppelt den Inhalt des Strings und gibt ihn zurück.
-    Mit dem Keyword \texttt{this} kann auf die aktuelle Instanz zugegriffen werden.
-    In der \texttt{main}-Methode wird die Funktion zweimal aufgerufen und das Ergebnis ausgegeben.
-    In Zeile 8 sieht man sogar, wie schön in in Kotlin die Extension Function direkt von dem String aufgerufen werden kann.
-    In Java kann man bestehende Klassen auch erweitern.
-    Dazu kann zum Beispiel das Decorator-Pattern verwendet werden oder von der erweiternden Klasse geerbt werden.
-    Dies führt aber zu deutlich mehr Boilerplate Code und ist nicht so elegant wie in Kotlin~\cite{kotlin-extensions}.\\
+    Kotlin bietet die Möglichkeit, bestehende Klassen um neue Funktionen zu erweitern, ohne deren Quellcode zu verändern oder von ihnen erben zu müssen.
+    Diese sogenannten Extension Functions können wie reguläre Methoden auf Instanzen aufgerufen werden.\\
+    \\
+    Besonders praktisch ist, dass sich mit Extension Functions nicht nur eigene Klassen erweitern lassen, sondern auch Klassen aus externen Bibliotheken.
+    Dadurch können fehlende Funktionalitäten bequem nachgerüstet werden, ohne bestehende Strukturen zu verändern.\\
+    \\
+    In Listing~\ref{lst:kotlin-extension-function} wird eine Extension Function \texttt{double} für die Klasse \texttt{String} implementiert.
+    Die Definition erfolgt durch Voranstellen des Klassennamens vor den Funktionsnamen, getrennt durch einen Punkt.
+    Innerhalb der Funktion kann mit dem Schlüsselwort \texttt{this} auf die aktuelle Instanz zugegriffen werden.
+    Die Methode verdoppelt den Inhalt des Strings und gibt diesen zurück.\\
+    \\
+    In der \texttt{main}-Methode wird die Funktion zweimal aufgerufen.
+    Besonders in Zeile 8 zeigt sich die Eleganz der Kotlin-Syntax.
+    Die Erweiterung lässt sich direkt auf dem String-Objekt aufrufen, als wäre sie eine native Methode der \texttt{String}-Klasse.\\
+    \\
+    Auch in Java ist es prinzipiell möglich, bestehende Klassen zu erweitern.
+    Die lässt sich beispielsweise durch das Decorator-Pattern oder Vererbung realisieren.
+    Diese Lösungen sind jedoch deutlich aufwändiger, führen zu mehr Boilerplate-Code und sind in der Praxis oft weniger flexibel~\cite{kotlin-extensions}.\\
     \\
 
     \begin{lstlisting}[language=Kotlin, caption={ExtensionFunction.kt}, label={lst:kotlin-extension-function}]
-package main.kotlin.com.spruhs
 
 fun String.double(): String {
     return "$this $this"
@@ -773,27 +862,28 @@ fun main() {
     \end{lstlisting}
 
     \subsubsection{Named Parameters, Properties und Primary Constructor}
-    Named Parameters und Properties sind zwei Features die oft zusammen verwendet werden.
-    Bei Named Parameters handelt es sich um eine Möglichkeit, Parameter in einer Funktion oder einem Konstruktor benennen zu können.
-    Dies ermöglicht es, die Parameter in beliebiger Reihenfolge anzugeben und nur die Parameter zu übergeben, die tatsächlich benötigt werden.
-    Properties können verwendet werden um einer Klasse Default Attribute hinzuzufügen.
-    Dazu kommt noch das Feature des Primary Constructors.
-    Der Primary Constructor ist der Konstruktor der Klasse, der direkt in der Klassendeklaration definiert wird.\\
+    Named Parameters und Properties sind zwei Sprachfeatures von Kotlin, die besonders in Kombination ihre Stärke entfalten.
+    Sie ermöglichen eine flexible und zugleich lesbare Art der Objektkonstruktion, die in Java meist nur mit zusätzlichem Boilerplate-Code erreichbar ist.\\
     \\
-    In Listing~\ref{lst:kotlin-builder-pattern} wird am Beispiel des Builder Pattern gezeigt, wie Named Parameters, Properties und Primary Constructor zusammen verwendet werden können.
-    Bei dem Builder Pattern handelt es sich um eines der klassischen Patterns von der Gang of Four das häufig verwendet wird um Objekte zu erstellen.
-    Mit diesem Pattern lässt sich mit nur einem Konstruktor eine Klasse mit einer beliebigen konstellation von Parametern erstellen~\cite{gang-of-four}.
-    In der \texttt{class} \texttt{User} werden die Attribute \texttt{firstName}, \texttt{lastName}, \texttt{titles} und \texttt{age} definiert.
-    Diese Attribute werden im Primary Constructor der Klasse definiert.
-    Diese Attribute sind alle optional und haben Default-Werte.
-    In der \texttt{main}-Methode werden zwei Objekt der Klasse \texttt{User} erstellt.
-    Dabei hat das erste Objekt alle Attribute und das zweite Objekt nur die Attribute \texttt{firstName} und \texttt{lastName}~\cite[46]{kotlin-patterns}.
-    Eine Mögliche implementierung in Java ist in Listing~\ref{lst:java-builder-pattern} zu sehen.
-    Diese Implementierung ist deutlich länger und unübersichtlicher als die Kotlin-Implementierung.\\
+    \textbf{Named Parameters} erlauben es, Funktions- oder Konstruktorparameter explizit mit Namen anzugeben.
+    Dies verbessert die Lesbarkeit und erlaubt es, Parameter in beliebiger Reihenfolge zu übergeben oder nur jene anzugeben, die tatsächlich notwendig sind.\\
+    \\
+    \textbf{Properties} ermöglichen es, Klassenattribute direkt im Konstruktor zu deklarieren.
+    Gemeinsam mit dem Konzept des \textbf{Primary Constructors}, der in Kotlin direkt in der Klassendeklaration definiert wird, lassen sich Klassen deutlich kompakter und intuitiver schreiben.\\
+    \\
+    In Listing~\ref{lst:kotlin-builder-pattern} wird am Beispiel des Builder Patterns gezeigt, wie diese Features zusammenwirken.
+    Das Builder Pattern ist ein klassisches Entwurfsmuster aus der „Gang of Four“-Sammlung, das häufig zur Konstruktion komplexer Objekte mit vielen optionalen Parametern verwendet wird~\cite[139]{gang-of-four}.\\
+    \\
+    In der Klasse \texttt{User} werden die Attribute \texttt{firstName}, \texttt{lastName}, \texttt{titles} und \texttt{age} im Primary Constructor definiert.
+    Alle mit Default-Werten.
+    Dadurch wird der Builder überflüssig, da sich Objekte flexibel und übersichtlich direkt über den Konstruktor erstellen lassen.
+    In der \texttt{main}-Methode wird ein Objekt mit allen Attributen und ein weiteres nur mit \texttt{firstName} und \texttt{lastName} erstellt~\cite[46]{kotlin-patterns}.\\
+    \\
+    Zum Vergleich zeigt Listing~\ref{lst:java-builder-pattern} eine mögliche Java-Implementierung desselben Patterns.
+    Diese fällt deutlich umfangreicher und weniger übersichtlich aus als die Kotlin-Variante.\\
     \\
 
     \begin{lstlisting}[language=Kotlin, caption={Builder.kt}, label={lst:kotlin-builder-pattern}]
-package main.kotlin.com.spruhs
 
 class User(
     val firstName: String = "",
@@ -818,7 +908,6 @@ fun main() {
     \end{lstlisting}
 
     \begin{lstlisting}[language=Java, caption={JavaUser.kt}, label={lst:java-builder-pattern}]
-        package main.kotlin.com.spruhs;
 
 import java.util.List;
 
@@ -896,7 +985,6 @@ public class JavaUser {
     \\
 
     \begin{lstlisting}[language=Kotlin, caption={ValueClasses.kt}, label={lst:kotlin-value-classes}]
-package main.kotlin.com.spruhs
 
 data class Person(
     val nickName: NickName,
@@ -926,17 +1014,22 @@ fun main() {
     \end{lstlisting}
 
     \subsubsection{Infix Notation}
-    Mit der Infix Notation kann man den Aufruf von Extension oder Member Funkionen kürzer schreiben.
-    Voraussetzung ist, dass die Funktionen nur einen Parameter, ohne Default Wert, hat.
-    In Listing~\ref{lst:kotlin-infix-notation} wird die mit dem Keyword infix die Klasse String um die Funktion \texttt{isLongerThan} erweitert.
-    Diese Funktion bekommt einen anderen String übergeben und prüft, ob dieser String kürzer ist als der aktuelle String.
-    In Zeile 10 wird die Infix Notation verwendet und diese Funktion aufgerufen, ohne dabei Klammern und Punkt zu benutzten.
-    In Zeile 11 passiert das gleiche aber ohne die Infix Notation.
-    Beide Aufrufe machen Inhaltlich das gleiche~\cite{kotlin-infix-notation}.\\
+    Mit der Infix-Notation können Funktionen, insbesondere Extension- oder Member-Funktionen, in einer besonders kompakten und lesbaren Form aufgerufen werden.
+    Voraussetzung ist, dass die Funktion genau einen Parameter hat, der keinen Default-Wert besitzt, und dass sie mit dem Schlüsselwort \texttt{infix} deklariert wurde.\\
+    \\
+    In Listing~\ref{lst:kotlin-infix-notation} wird die Klasse \texttt{String} um die Funktion \texttt{isLongerThan} erweitert.
+    Diese Funktion vergleicht zwei Strings miteinander und prüft, ob der aktuelle String länger ist als der übergebene.\\
+    \\
+    In Zeile 10 wird die Funktion mithilfe der Infix-Notation aufgerufen.
+    Dabei wird weder ein Punkt noch Klammern benötigt.
+    Dadurch ergibt sich ein besonders lesbarer, fast schon natürlicher Code.
+    In Zeile 11 wird dieselbe Funktion regulär mit Punkt- und Klammernotation aufgerufen.
+    Beide Varianten haben denselben Effekt~\cite{kotlin-infix-notation}.\\
+    \\
+    Die Infix-Notation kann dazu beitragen, bestimmte Ausdrücke wie z.B. mathematische oder domänenspezifische Operationen intuitiver lesbar zu gestalten.\\
     \\
 
     \begin{lstlisting}[language=Kotlin, caption={InfixNotation.kt}, label={lst:kotlin-infix-notation}]
-package main.kotlin.com.spruhs
 
 infix fun String.isLongerThan(other: String): Boolean {
     return this.length > other.length
@@ -951,6 +1044,61 @@ fun main() {
     \end{lstlisting}
 
     \section{Fazit}
+
+    Kotlin wurde mit dem Anspruch entwickelt, ein besseres und moderneres Java zu sein.
+    Um dies umzusetzen, hat Kotlin einige Features eingeführt, die es deutlich von Java abheben und eine spürbare Verbesserung darstellen.\\
+    \\
+    Das Null-Safety-Feature ist wohl eines der ersten, das einem in den Sinn kommt, wenn man sich entscheiden muss, welche der beiden Sprachen man einsetzen möchte.
+    Die Frage, ob man eine Sprache mit einem Billion-Dollar-Fehler oder ohne diesen Fehler nutzen möchte, beantwortet sich hier wohl von selbst.\\
+    \\
+    Auch das Festhalten an einem rein objektorientierten Paradigma schränkt in der heutigen Softwareentwicklung eher ein.
+    Moderne Systeme bestehen häufig aus kleinen, abgeschlossenen Einheiten, die entkoppelt und asynchron miteinander kommunizieren.
+    Hier bietet Kotlin mit seinen Coroutines eine elegante und einfache Möglichkeit zur Umsetzung.
+    Der bessere Ressourceneinsatz ist ein weiterer Grund, nicht mehr auf klassische Threads zu setzen.\\
+    \\
+    Dies sind wohl die drei wichtigsten Argumente, die eine klare Tendenz zu Kotlin geben.
+    Kotlin bietet darüber hinaus eine deutlich schlankere Syntax.
+    Der Compiler hilft dabei, Typen zu erkennen, sodass diese oft gar nicht mehr explizit genannt werden müssen.
+    Viele kleine Features lassen sich gut miteinander kombinieren, um das zu erreichen, was in Java nur mit aufwendigen Patterns möglich wäre.
+    Das führt zu besser lesbarem Code und weniger Boilerplate.\\
+    \\
+    Die wenigen Features, die Java hat und Kotlin nicht, werden häufig durch bessere Lösungen in Kotlin ersetzt.
+    Die Features, die Kotlin bewusst nicht übernommen hat, fehlen nicht.
+    Sie waren in Java oft eher problematisch oder unhandlich.\\
+    \\
+    Der größte Vorteil, den Java gegenüber Kotlin hat, ist die riesige Infrastruktur die über Jahrzehnte gewachsen ist.
+    Große Communities, umfangreiche Fachliteratur, eine riesige Auswahl an Bibliotheken und Frameworks.
+    Doch dieses Problem, das auch viele andere junge Programmiersprachen betrifft, hat Kotlin durch seine Interoperabilität elegant gelöst.
+    Kotlin kann all diese Ressourcen direkt mitnutzen und startet dadurch nicht bei null.\\
+    \\
+    Nicht nur bei der Neuentwicklung stellt sich die Frage, ob man Kotlin Java vorziehen sollte.
+    Da sogar langjährig bestehende Java-Projekte nahezu nahtlos mit Kotlin weiterentwickelt werden können, lohnt sich die Überlegung, ob der Umstieg nicht auch dort sinnvoll wäre.\\
+    \\
+    Dass Kotlin zur offiziellen Standardsprache für die Android-Entwicklung gewählt wurde, ist ein weiteres starkes Zeichen dafür, dass Kotlin auch in Zukunft aktiv weiterentwickelt wird.\\
+    \\
+    Wenn man sich als Projekt oder Firma im Umfeld der JVM bewegt, sehe ich nur wenige Gründe, nicht darüber nach zu denken auf Kotlin zu wechseln.\\
+    \\
+    Ich selbst arbeite seit mehreren Jahren als Java-Fullstack-Consultant in verschiedenen Projekten.
+    Seit April 2024 bin ich nun in meinem ersten Projekt, das im Backend ausschließlich Kotlin einsetzt.
+    Die Einarbeitung in die neue Sprache war dabei kein Problem.
+    Die neuen Features konnte ich sehr schnell in mein Repertoire aufnehmen.\\
+    \\
+    Kotlin bietet unzählige kleine Funktionen und Sprachfeatures, die zu schönerem und besser lesbarem Code führen.
+    Hierzu gehören etwa scoped functions wie \texttt{also}, \texttt{apply} oder \texttt{let}, oder hilfreiche Utility-Funktionen wie \texttt{associateBy()}.
+    Der Vorteil dieser Features lässt sich schwer in so einem Text wie diesen beschreiben.
+    Man muss sie selbst erleben um den "Flow" den Kotlin bietet zu verstehen.\\
+    \\
+    Seit ich mit Kotlin arbeite, möchte ich nicht mehr zurück in die alte Java-Welt.
+    Ich hoffe, dass mein nächstes Projekt ebenfalls auf Kotlin setzen wird.\\
+    \\
+    Ich sehe kein Problem darin, dass Java-Entwickler auf Kotlin umsteigen.
+    Anfangs muss man darauf achten, keinen Java-Code mit Kotlin-Syntax zu schreiben.
+    Aber dafür gibt es zahlreiche gute Tutorials die genau das zeigen.
+    Der Umstieg macht vor allem eines: viel Spaß!\\
+    \\
+    Im Vergleich zu anderen modernen Sprachen wie Go oder Rust fehlen Kotlin zwar noch ein paar Features, die ich mir wünschen würde.
+    Hierzu gehört etwa ein eigenes Build-Tool und Package-Manager oder die Möglichkeit, direkt mit Zeigern zu arbeiten, um noch effizienteren Code zu schreiben.
+    Trotzdem führt meiner Meinung nach im JVM-Umfeld kein Weg an Kotlin vorbei.\\
 
     \printbibliography[
         heading=bibintoc,

@@ -14,7 +14,8 @@ class JavaUser {
 
 public class NullHandlingExample {
     public static String getUserName(JavaUser user) {
-        return (user != null && user.getName() != null) ? user.getName() : "Unbekannter Benutzer";
+        return (user != null && user.getName() != null) ?
+                user.getName() : "Unbekannter Benutzer";
     }
 
     public static void main(String[] args) {
