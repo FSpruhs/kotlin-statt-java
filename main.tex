@@ -90,15 +90,14 @@
     \tableofcontents
     \newpage
 
-
     \section{Einleitung}
     Java ist den meisten Entwicklern ein Begriff.
-    Es ist eine weit verbreitete Programmiersprache, die seit ihrer Einführung im Jahr 1995 eine zentrale Rolle in der Softwareentwicklung spielt.
+    Es ist eine weit verbreitete Programmiersprache, die seit ihrer Einführung im Jahr 1995 eine zentrale Rolle in der Softwareentwicklung spielt~\cite[49]{insel}.
     Kotlin ist eine relativ neue Programmiersprache, die 2011 von JetBrains veröffentlicht wurde.
-    Sie wurde mit dem Ziel entwickelt, eine moderne und verbesserte Alternative zu Java zu schaffen.
-    In diesem Text werden die Unterschiede zwischen Java und Kotlin untersucht.
-    Es wird untersucht, inwieweit Kotlin eine geeignete Alternative zu Java darstellt und welche Vorteile Kotlin gegenüber Java bietet.\\
+    Sie wurde mit dem Ziel entwickelt, eine moderne und verbesserte Alternative zu Java zu schaffen~\cite[19]{kotlin-handbuch}.\\
     \\
+    In diesem Text werden die Unterschiede zwischen Java und Kotlin untersucht.
+    Es wird untersucht, inwieweit Kotlin eine geeignete Alternative zu Java darstellt und welche Vorteile Kotlin gegenüber Java bietet.
     Zunächst werden beide Programmiersprachen kurz vorgestellt.
     Anschließend wird auf die Interoperabilität zwischen Java und Kotlin eingegangen.
     Dabei soll gezeigt werden, inwieweit sich Java und Kotlin in einem Projekt kombinieren lassen, bzw. wie bestehende Java-Projekte mit Kotlin weitergeführt werden können.\\
@@ -119,22 +118,19 @@
         \item \textbf{Erscheinungsjahr:} 1995
         \item \textbf{Entwickler:} Sun Microsystems
         \item \textbf{Entwickler ab 2009:} Oracle Corporation
-        \item \textbf{Programier paradigmen:} objektorientiert
+        \item \textbf{Programmier paradigmen:} objektorientiert
         \item \textbf{Aktuelle LTS version:} 21
     \end{itemize}
 
     \subsection{Technischer Hintergrund}
     Java ist eine Programmiersprache, die von Sun Microsystems entwickelt und im Jahr 1995 veröffentlicht wurde.
-    Sie zeichnet sich durch ihre Plattformunabhängigkeit, hohe Robustheit und vielseitigen Einsatzmöglichkeiten aus,
-    wodurch sie insbesondere in der Industrie und im Unternehmensumfeld eine zentrale Rolle spielt.\\
+    Sie zeichnet sich durch ihre Plattformunabhängigkeit, hohe Robustheit und vielseitigen Einsatzmöglichkeiten aus,wodurch sie insbesondere in der Industrie und im Unternehmensumfeld eine zentrale Rolle spielt.\\
     \\
     Ein wesentliches Merkmal von Java ist die Art der Code-Ausführung.
     Anstatt direkt in Maschinencode übersetzt zu werden, wird der Quellcode zunächst in Bytecode kompiliert.
     Dieser Bytecode wird anschließend von der Java Virtual Machine (JVM) interpretiert und ausgeführt.
-    Durch dieses Konzept ist Java nicht an eine spezifische Prozessorarchitektur oder ein
-    bestimmtes Betriebssystem gebunden, was eine hohe Portabilität gewährleistet.
-    Diese Plattformunabhängigkeit stellt einen bedeutenden Vorteil dar, den
-    viele andere Programmiersprachen im Laufe der Zeit übernommen haben.\\
+    Durch dieses Konzept ist Java nicht an eine spezifische Prozessorarchitektur oder ein bestimmtes Betriebssystem gebunden, was eine hohe Portabilität gewährleistet.
+    Diese Plattformunabhängigkeit stellt einen bedeutenden Vorteil dar, den viele andere Programmiersprachen im Laufe der Zeit übernommen haben.\\
     \\
     Neben der Plattformunabhängigkeit bietet die JVM zahlreiche zusätzliche
     Funktionen, die zur Stabilität und Sicherheit von Java-Anwendungen beitragen.
@@ -170,7 +166,7 @@
     \begin{itemize}
         \item \textbf{Erscheinungsjahr:} 2011
         \item \textbf{Entwickler:} Jetbrains
-        \item \textbf{Programier paradigmen:} objektorientiert, funktional
+        \item \textbf{Programmier paradigmen:} objektorientiert, funktional
         \item \textbf{Aktuelle LTS version:} 2.1.0
     \end{itemize}
 
@@ -269,8 +265,8 @@ public static void main(String[] args) {
     Dies spielt für viele Kotlin-Projekte eine entscheidende Rolle, insbesondere wenn auf etablierte Java-Ökosysteme wie Spring oder Hibernate zurückgegriffen wird.\\
     \\
     Im folgenden Beispiel werden zwei verschiedene Arten gezeigt, wie Java-Klassen in Kotlin eingebunden werden können.
-    Einmal über eine Instanzmethode und einmal über eine statische Methode.
-
+    Einmal über eine Instanzmethode und einmal über eine statische Methode.\\
+    \\
     Die Integration von Java in Kotlin ist besonders einfach, da Kotlin die Java-Klassen so behandelt, als wären sie eigene Kotlin-Klassen.
     Statische Methoden und Felder werden in Kotlin über den Klassennamen aufgerufen, Instanzmethoden funktionieren analog wie in Kotlin selbst.
     Damit bietet Kotlin ein hohes Maß an Interoperabilität mit Java, was den Umstieg oder die parallele Nutzung beider Sprachen deutlich vereinfacht.\\
@@ -346,8 +342,7 @@ fun main() {
     Schließlich ist auch der Umgang mit primitiven Datentypen unterschiedlich: Java unterscheidet streng zwischen primitiven Typen (z.B. int, boolean) und ihren Wrapper-Klassen (Integer, Boolean).
     In Kotlin gibt es diese Trennung nicht auf Sprachebene.
     Hier sind alle Typen Klassen.
-    Allerdings sorgt der Kotlin-Compiler dafür, dass im Bytecode bei Bedarf trotzdem die entsprechenden Java-Primitives verwendet werden, um keine Performanceeinbußen zu verursachen.
-    \cite{doc-comparison}
+    Allerdings sorgt der Kotlin-Compiler dafür, dass im Bytecode bei Bedarf trotzdem die entsprechenden Java-Primitives verwendet werden, um keine Performanceeinbußen zu verursachen~\cite{doc-comparison}.
 
     \begin{table}[h!]
         \centering
