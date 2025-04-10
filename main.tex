@@ -92,7 +92,7 @@
 
     \section{Einleitung}
     Java ist den meisten Entwicklern ein Begriff.
-    Es ist eine weit verbreitete Programmiersprache, die seit ihrer Einführung im Jahr 1995 eine zentrale Rolle in der Softwareentwicklung spielt~\cite[49]{insel}.
+    Es ist eine weit verbreitete Programmiersprache, die seit ihrer Einführung im Jahr 1995 eine zentrale Rolle in der Softwareentwicklung spielt~\cite[54]{insel}.
     Kotlin ist eine relativ neue Programmiersprache, die 2011 von JetBrains veröffentlicht wurde.
     Sie wurde mit dem Ziel entwickelt, eine moderne und verbesserte Alternative zu Java zu schaffen~\cite[19]{kotlin-handbuch}.\\
     \\
@@ -172,24 +172,22 @@
 
     \subsection{Technischer Hintergrund}
     Kotlin wurde 2011 von der Firma JetBrains veröffentlicht.
-    Ziel der Entwicklung war es, eine verbesserte Alternative zu Java zu schaffen(vgl~\cite[19]{kotlin-handbuch}).
+    Ziel der Entwicklung war es, eine verbesserte Alternative zu Java zu schaffen~\cite[19]{kotlin-handbuch}.
     Schon an der Namensgebung kann man die nähe zu Java erkennen.
     Der Name Java bezieht sich auf eine Indonesische Insel.
     Der Namensgeber von Kotlin ist eine russische Insel vor St. Petersburg.\\
     \\
     Obwohl Java nur etwa 15 Jahre älter als Kotlin ist, stellt dies in der schnelllebigen Welt der Softwareentwicklung eine erhebliche Zeitspanne dar.
     In vielerlei Hinsicht wirkt Java inzwischen veraltet.
-    Die Syntax ist vergleichsweise umständlich, und einige moderne Sprachfeatures, die in anderen Programmiersprachen standardmäßig verfügbar sind, fehlen in Java oder
-    müssen umständlich über externe Tools nachgerüstet werden.
-    Zudem setzt Java ausschließlich auf das objektorientierte Paradigma,
-    während moderne Programmiersprachen häufig eine Kombination aus objektorientierter und funktionaler Programmierung unterstützen.\\
+    Die Syntax ist vergleichsweise umständlich, und einige moderne Sprachfeatures, die in anderen Programmiersprachen standardmäßig verfügbar sind, fehlen in Java oder müssen umständlich über externe Tools nachgerüstet werden.
+    Zudem setzt Java ausschließlich auf das objektorientierte Paradigma, während moderne Programmiersprachen häufig eine Kombination aus objektorientierter und funktionaler Programmierung unterstützen.\\
     \\
     Bei der Entwicklung von Kotlin hat JetBrains bewusst aus den Designfehlern von Java gelernt.
-    Gleichzeitig wurden essenzielle Eigenschaften, die zur Popularität von Java beigetragen haben, beibehalten.\\
+    Gleichzeitig wurden essenzielle Eigenschaften, die zur Popularität von Java beigetragen haben, beibehalten~\cite[20]{kotlin-handbuch}.\\
     \\
-    Kotlin-Code wird ebenfalls in Bytecode kompiliert und kann auf der Java Virtual Machine (JVM) ausgeführt werden.
+    Kotlin-Code kann ebenfalls in Bytecode kompiliert und kann auf der Java Virtual Machine (JVM) ausgeführt werden~\cite{kotlin-compile}.
     Dies bietet den großen Vorteil, dass Kotlin-Programme überall dort lauffähig sind, wo auch Java-Code ausgeführt werden kann.
-    Zudem kann Kotlin auf sämtliche vorhandenen Java-Bibliotheken zugreifen und diese nutzen, wodurch nahezu das gesamte Java-Ökosystem zur Verfügung steht.
+    Zudem kann Kotlin dadurch auf sämtliche vorhandenen Java-Bibliotheken zugreifen und diese nutzen, wodurch nahezu das gesamte Java-Ökosystem zur Verfügung steht~\cite[20]{kotlin-handbuch}.
     Die Interoperabilität zwischen Kotlin und Java geht sogar noch weiter.
     Beide Sprachen lassen sich nahtlos in einem Projekt kombinieren.
     Dadurch können auch bestehende Java-Anwendungen schrittweise mit Kotlin weiterentwickelt werden~\cite[19-20]{kotlin-handbuch}.\\
@@ -269,7 +267,7 @@ public static void main(String[] args) {
     \\
     Die Integration von Java in Kotlin ist besonders einfach, da Kotlin die Java-Klassen so behandelt, als wären sie eigene Kotlin-Klassen.
     Statische Methoden und Felder werden in Kotlin über den Klassennamen aufgerufen, Instanzmethoden funktionieren analog wie in Kotlin selbst.
-    Damit bietet Kotlin ein hohes Maß an Interoperabilität mit Java, was den Umstieg oder die parallele Nutzung beider Sprachen deutlich vereinfacht.\\
+    Damit bietet Kotlin ein hohes Maß an Interoperabilität mit Java, was den Umstieg oder die parallele Nutzung beider Sprachen deutlich vereinfacht~\cite{kotlin-java-in-kotlin}.\\
     \\
 
     \begin{lstlisting}[language=Java, caption={JavaClassMethodGreeter.java}]
@@ -317,32 +315,33 @@ fun main() {
     \\
     Ein klassisches Beispiel hierfür sind \texttt{static} Members.
     Kotlin kennt das \texttt{static}-Schlüsselwort nicht.
-    Stattdessen bietet Kotlin das Konzept der \texttt{Companion Objects}, um Klassenfunktionen und Klasseneigenschaften zu definieren, die unabhängig von einer konkreten Instanz verfügbar sein sollen.\\
+    Stattdessen bietet Kotlin das Konzept der \texttt{Companion Objects}, um Klassenfunktionen und Klasseneigenschaften zu definieren, die unabhängig von einer konkreten Instanz verfügbar sein sollen~\cite{kotlin-static-members}.\\
     \\
     Auch das in Java etablierte Konzept der Wildcards (wie \texttt{? extends T} oder \texttt{? super T}) zur Variabilität in generischen Typen wird in Kotlin nicht verwendet.
-    An dessen Stelle treten in Kotlin zwei modernere Mechanismen: die Declaration-Site Variance (z.B. \texttt{out T} oder \texttt{in T}) und \texttt{Type Projections}, die eine bessere Lesbarkeit und Typensicherheit ermöglichen.\\
+    An dessen Stelle treten in Kotlin zwei modernere Mechanismen: die Declaration-Site Variance (z.B. \texttt{out T} oder \texttt{in T}) und \texttt{Type Projections}, die eine bessere Lesbarkeit und Typensicherheit ermöglichen~\cite{doc-comparison}.\\
     \\
     Der aus Java bekannte Ternary-Operator (\texttt{condition ? trueExpr : falseExpr}) entfällt in Kotlin vollständig, da \texttt{if}-Anweisungen dort als Ausdrücke gestaltet sind und somit selbst einen Wert zurückgeben können.
-    Dadurch lässt sich die gleiche Funktionalität deutlich eleganter realisieren.\\
+    Dadurch lässt sich die gleiche Funktionalität deutlich eleganter realisieren~\cite{doc-comparison}.\\
     \\
-    Das Pattern-Matching wird in Kotlin durch die Smart-Casts ersetzt.\\
+    Das Pattern-Matching wird in Kotlin durch die Smart-Casts ersetzt~\cite{doc-comparison}.\\
     \\
-    Die mit Java 14 eingeführten \texttt{Records}, die als einfache, immutable Datencontainer dienen, wurden in Kotlin durch die \texttt{data class} ersetzt.
-    Diese bieten ähnliche Vorteile, wie automatische Implementierungen von \texttt{equals()}, \texttt{hashCode()} und \texttt{toString()}.\\
+    Die mit Java 14 eingeführten \texttt{Records}, die als einfache, immutable Datencontainer dienen, gibt es in Kotlin so nicht~\cite{jdk-record}.
+    Dafür wurde in Kotlin die \texttt{data class} eingeführt.
+    Diese bieten ähnliche Vorteile, wie automatische Implementierungen von \texttt{equals()}, \texttt{hashCode()} und \texttt{toString()}~\cite{kotlin-data-class}.\\
     \\
-    Checked Exceptions, ein markantes Merkmal der Java-Fehlerbehandlung, existieren in Kotlin nicht mehr.
-    Diese Entscheidung wurde bewusst getroffen, da checked exceptions oft als hinderlich für die Lesbarkeit und Wartbarkeit des Codes empfunden werden.
+    Checked Exceptions, ein markantes Merkmal der Java-Fehlerbehandlung, existieren in Kotlin nicht mehr~\cite{doc-comparison}.
     Fehlerbehandlung in Kotlin erfolgt stattdessen durch unchecked exceptions oder alternative Ansätze wie das Result-Typ-Pattern.
     Hierzu bietet Kotlin den \texttt{Result}-Typ, der eine elegante Möglichkeit zur Handhabung von Erfolgen und Fehlern in einer Funktion bietet.\\
     \\
     Ein weiterer Unterschied liegt in der Sichtbarkeit von Klassen und Mitgliedern.
-    Während Java das Schlüsselwort \texttt{package-private} (also ohne Sichtbarkeitsmodifikator) kennt, wurde diese Möglichkeit in Kotlin entfernt.
-    In Kotlin gibt es stattdessen die Schlüsselwörter \texttt{public}, \texttt{internal}, \texttt{protected} und \texttt{private}.\\
+    Während Java das Schlüsselwort \texttt{package-private} (also ohne Sichtbarkeitsmodifikator) kennt, wurde diese Möglichkeit in Kotlin entfernt~\cite{doc-comparison}.
+    In Kotlin gibt es stattdessen die Schlüsselwörter \texttt{public}, \texttt{internal}, \texttt{protected} und \texttt{private}~\cite{kotlin-visibility}.\\
     \\
-    Schließlich ist auch der Umgang mit primitiven Datentypen unterschiedlich: Java unterscheidet streng zwischen primitiven Typen (z.B. int, boolean) und ihren Wrapper-Klassen (Integer, Boolean).
+    Schließlich ist auch der Umgang mit primitiven Datentypen unterschiedlich.
+    Java unterscheidet zwischen primitiven Typen (z.B. int, boolean) und ihren Wrapper-Klassen (Integer, Boolean)~\cite{java-autobox}.
     In Kotlin gibt es diese Trennung nicht auf Sprachebene.
     Hier sind alle Typen Klassen.
-    Allerdings sorgt der Kotlin-Compiler dafür, dass im Bytecode bei Bedarf trotzdem die entsprechenden Java-Primitives verwendet werden, um keine Performanceeinbußen zu verursachen~\cite{doc-comparison}.
+    Allerdings sorgt der Kotlin-Compiler dafür, dass im Bytecode bei Bedarf trotzdem die entsprechenden Java-Primitives verwendet werden, um keine Performanceeinbußen zu verursachen~\cite{kotlin-types}.
 
     \begin{table}[h!]
         \centering
@@ -402,7 +401,7 @@ fun main() {
     Tony Hoare war 1965 an der Einführung der ersten Null-Referenz in der objektorientierten Sprache ALGOL W beteiligt.
     Im Jahr 2009 bezeichnete er dies rückblickend als den „Milliarden-Dollar-Fehler“~\cite{billion-dollar-mistake}.
     Auch in Java wurde dieser Fehler durch die Einführung von \texttt{null} als Referenzwert übernommen.
-    In Java können alle Referenztypen, mit Ausnahme der primitiven Datentypen, den Wert \texttt{null} annehmen.\\
+    In Java können alle Referenztypen, mit Ausnahme der primitiven Datentypen, den Wert \texttt{null} annehmen~\cite{kotlin-null}.\\
     \\
     Dies führt in der Praxis häufig zu sogenannten \texttt{NullPointerException}, ein weit verbreiteter Laufzeitfehler in Java-Anwendungen.
     Um diese zu vermeiden, müsste man theoretisch jede Referenz vor dem Zugriff auf \texttt{null} prüfen.
@@ -413,7 +412,7 @@ fun main() {
     In Kotlin sind Referenzen standardmäßig \texttt{non-nullable}.
     Ein Wert kann nur dann \texttt{null} sein, wenn der entsprechende Typ explizit als \texttt{nullable} deklariert wurde.
     Die geschieht durch Anhängen eines Fragezeichens (\texttt{?}) an den Typnamen.
-    Der Kotlin-Compiler erzwingt daraufhin eine explizite Überprüfung, wodurch potenzielle \texttt{NullPointerException} bereits zur Compile-Zeit erkannt und vermieden werden können.\\
+    Der Kotlin-Compiler erzwingt daraufhin eine explizite Überprüfung, wodurch potenzielle \texttt{NullPointerException} bereits zur Compile-Zeit erkannt und vermieden werden können~\cite{kotlin-null}.\\
     \\
     Dieses Sprachfeature trägt erheblich zur Robustheit und Stabilität von Kotlin-Programmen bei, da viele Fehlerquellen bereits zur Entwicklungszeit erkannt werden.
     Darüber hinaus vereinfacht es das Debugging und beschleunigt die Fehlersuche deutlich.
@@ -503,13 +502,12 @@ public class NullHandlingExample {
     Die funktionale Programmierung hat in den letzten Jahren zunehmend an Bedeutung gewonnen.
     Ein wesentlicher Grund dafür liegt in der stagnierenden Entwicklung der CPU-Geschwindigkeit.
     Während in früheren Jahren Leistungssteigerungen hauptsächlich durch höhere Taktfrequenzen erzielt wurden, liegt der Fokus heute verstärkt auf Mehrkernprozessoren.
-    Daraus ergibt sich die Notwendigkeit, Programme parallel auszuführen, um die vorhandenen Ressourcen effizient zu nutzen.\\
-    \\
+    Daraus ergibt sich die Notwendigkeit, Programme parallel auszuführen, um die vorhandenen Ressourcen effizient zu nutzen.
     Die funktionale Programmierung eignet sich besonders gut für Parallelisierungskonzepte, da sie auf Zustandslosigkeit und Nebenwirkungsfreiheit basiert.
     Diese Eigenschaften vereinfachen die Ausführung von Code und machen sie zugleich sicherer~\cite[129]{kotlin-patterns}.\\
     \\
     Kotlin wurde von Beginn an mit dem Ziel entwickelt, eine moderne Programmiersprache bereitzustellen, die sowohl objektorientierte als auch funktionale Paradigmen unterstützt.
-    Im Gegensatz dazu wurde Java ursprünglich als rein objektorientierte Sprache konzipiert und hat erst mit Version 8 funktionale Sprachmerkmale wie Lambda-Ausdrücke und Streams eingeführt.\\
+    Im Gegensatz dazu wurde Java ursprünglich als rein objektorientierte Sprache konzipiert und hat erst mit Version 8 funktionale Sprachmerkmale wie Lambda-Ausdrücke und Streams eingeführt~\cite[54]{insel}.\\
     \\
     Im Folgenden werden einige der wichtigsten funktionalen Konzepte von Kotlin vorgestellt und mit entsprechenden Merkmalen in Java verglichen.
     Ziel ist es, die Unterschiede sowie die jeweiligen Stärken beider Sprachen im funktionalen Kontext zu verdeutlichen.
@@ -517,7 +515,7 @@ public class NullHandlingExample {
     \subsubsection{Higher-Order-Functions}
     Kotlin unterstützt sogenannte Higher-Order Functions.
     Das sind Funktionen, die andere Funktionen als Parameter entgegennehmen oder selbst Funktionen zurückgeben können.
-    Funktionen sind in Kotlin sogenannte \textit{First-Class Citizens}, was bedeutet, dass sie wie andere Datentypen behandelt werden können, z.B. indem man sie Variablen zuweist oder als Rückgabewerte verwendet.\\
+    Funktionen sind in Kotlin sogenannte \textit{First-Class Citizens}, was bedeutet, dass sie wie andere Datentypen behandelt werden können, z.B. indem man sie Variablen zuweist oder als Rückgabewerte verwendet~\cite{kotlin-functions}.\\
     \\
     In Java hingegen können Funktionen nicht direkt übergeben werden, da Java ursprünglich keine funktionalen Konzepte vorsah.
     Stattdessen wurde Funktionalität in Methoden gekapselt, die Teil eines Objekts sind.
