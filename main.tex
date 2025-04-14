@@ -124,22 +124,22 @@
 
     \subsection{Technischer Hintergrund}
     Java ist eine Programmiersprache, die von Sun Microsystems entwickelt und im Jahr 1995 veröffentlicht wurde.
-    Sie zeichnet sich durch ihre Plattformunabhängigkeit, hohe Robustheit und vielseitigen Einsatzmöglichkeiten aus,wodurch sie insbesondere in der Industrie und im Unternehmensumfeld eine zentrale Rolle spielt.\\
+    Sie zeichnet sich durch ihre Plattformunabhängigkeit, hohe Robustheit und vielseitigen Einsatzmöglichkeiten aus,wodurch sie insbesondere in der Industrie und im Unternehmensumfeld eine zentrale Rolle spielt~\cite[55]{insel}.\\
     \\
     Ein wesentliches Merkmal von Java ist die Art der Code-Ausführung.
     Anstatt direkt in Maschinencode übersetzt zu werden, wird der Quellcode zunächst in Bytecode kompiliert.
     Dieser Bytecode wird anschließend von der Java Virtual Machine (JVM) interpretiert und ausgeführt.
     Durch dieses Konzept ist Java nicht an eine spezifische Prozessorarchitektur oder ein bestimmtes Betriebssystem gebunden, was eine hohe Portabilität gewährleistet.
-    Diese Plattformunabhängigkeit stellt einen bedeutenden Vorteil dar, den viele andere Programmiersprachen im Laufe der Zeit übernommen haben.\\
+    Diese Plattformunabhängigkeit stellt einen bedeutenden Vorteil dar, den viele andere Programmiersprachen im Laufe der Zeit übernommen haben~\cite[52]{insel}.\\
     \\
     Neben der Plattformunabhängigkeit bietet die JVM zahlreiche zusätzliche
     Funktionen, die zur Stabilität und Sicherheit von Java-Anwendungen beitragen.
     Dazu gehören unter anderem eine automatische Speicherverwaltung
     durch den Garbage Collector, eine starke Typisierung zur Minimierung
     von Laufzeitfehlern sowie eine integrierte Unterstützung für Multithreading,
-    die eine effiziente nebenläufige Verarbeitung ermöglicht. \cite[51 - 54]{insel}\\
+    die eine effiziente nebenläufige Verarbeitung ermöglicht\cite[51 - 55]{insel}.\\
     \\
-    Java basiert konsequent auf dem objektorientierten Programmierparadigma, das die Strukturierung von Software in Klassen und Objekte ermöglicht. \\
+    Java basiert konsequent auf dem objektorientierten Programmierparadigma, das die Strukturierung von Software in Klassen und Objekte ermöglicht~\cite[54]{insel}. \\
     \\
     \subsection{Verbreitung}
     Der TIOBE-Index misst monatlich die Popularität und Verbreitung von Programmiersprachen~\cite{tiobe}.
@@ -152,7 +152,7 @@
     Auch im Februar 2025 belegte Java den dritten Platz im TIOBE-Index (siehe Abbildung~\ref{fig:tiobe-java-2025}).\\
     \\
     Java ist die Basis zahlreicher Anwendungen und wird in vielfältigen Bereichen eingesetzt.
-    Darüber hinaus verfügt Java über eine umfangreiche Ökosystemlandschaft mit einer Vielzahl an Bibliotheken, Paketen,Frameworks und Fachliteratur.\\
+    Darüber hinaus verfügt Java über eine umfangreiche Ökosystemlandschaft mit einer Vielzahl an Bibliotheken, Paketen, Frameworks und Fachliteratur~\cite[55]{insel}.\\
     \\
     Die weltweite Java-Community ist äußerst aktiv und umfasst eine große Anzahl an erfahrenen Entwicklern, die kontinuierlich zum Wissenstransfer und zur Weiterentwicklung der Sprache beitragen.
     Ein Beispiel für die Größe dieser Infrastruktur ist das Maven-Repository, das über 2.800 Repositories mit mehr als 52 Millionen Java-Paketen enthält~\cite{maven}.\\
@@ -179,8 +179,10 @@
     \\
     Obwohl Java nur etwa 15 Jahre älter als Kotlin ist, stellt dies in der schnelllebigen Welt der Softwareentwicklung eine erhebliche Zeitspanne dar.
     In vielerlei Hinsicht wirkt Java inzwischen veraltet.
-    Die Syntax ist vergleichsweise umständlich, und einige moderne Sprachfeatures, die in anderen Programmiersprachen standardmäßig verfügbar sind, fehlen in Java oder müssen umständlich über externe Tools nachgerüstet werden.
-    Zudem setzt Java ausschließlich auf das objektorientierte Paradigma, während moderne Programmiersprachen häufig eine Kombination aus objektorientierter und funktionaler Programmierung unterstützen.\\
+    Die Syntax ist vergleichsweise umständlich, und einige moderne Sprachfeatures, wurden erst später realisiert und wurden daher nicht perfekt in die Sprache integriert~\cite[19]{kotlin-handbuch}.
+    Zudem setzt Java ausschließlich auf das objektorientierte Paradigma, während moderne Programmiersprachen häufig eine Kombination aus objektorientierter und funktionaler Programmierung unterstützen.
+    Hierzu gehören z.B. Go~\cite[34]{go} oder Rust~\cite[105]{rust}.
+    Bei beiden Sprachen wird zugunsten der ausführungsgeschwindigkeit darauf verzichtet ein rein objektorientiert Sprache anzubieten.\\
     \\
     Bei der Entwicklung von Kotlin hat JetBrains bewusst aus den Designfehlern von Java gelernt.
     Gleichzeitig wurden essenzielle Eigenschaften, die zur Popularität von Java beigetragen haben, beibehalten~\cite[20]{kotlin-handbuch}.\\
@@ -260,7 +262,7 @@ public static void main(String[] args) {
     Auch die umgekehrte Richtung ist problemlos möglich.
     Java-Code lässt sich ohne Weiteres in Kotlin verwenden.
     Dies bietet insbesondere den Vorteil, dass bestehende Java-Bibliotheken und -Frameworks weiterhin genutzt werden können.
-    Dies spielt für viele Kotlin-Projekte eine entscheidende Rolle, insbesondere wenn auf etablierte Java-Ökosysteme wie Spring oder Hibernate zurückgegriffen wird.\\
+    Dies spielt für viele Kotlin-Projekte eine entscheidende Rolle, insbesondere wenn auf etablierte Java-Ökosysteme wie \texttt{Spring}~\cite{spring} oder \texttt{Hibernate}~\cite{hibernate} zurückgegriffen wird.\\
     \\
     Im folgenden Beispiel werden zwei verschiedene Arten gezeigt, wie Java-Klassen in Kotlin eingebunden werden können.
     Einmal über eine Instanzmethode und einmal über eine statische Methode.\\
@@ -321,7 +323,7 @@ fun main() {
     An dessen Stelle treten in Kotlin zwei modernere Mechanismen: die Declaration-Site Variance (z.B. \texttt{out T} oder \texttt{in T}) und \texttt{Type Projections}, die eine bessere Lesbarkeit und Typensicherheit ermöglichen~\cite{doc-comparison}.\\
     \\
     Der aus Java bekannte Ternary-Operator (\texttt{condition ? trueExpr : falseExpr}) entfällt in Kotlin vollständig, da \texttt{if}-Anweisungen dort als Ausdrücke gestaltet sind und somit selbst einen Wert zurückgeben können.
-    Dadurch lässt sich die gleiche Funktionalität deutlich eleganter realisieren~\cite{doc-comparison}.\\
+    Dadurch lässt sich die gleiche Funktionalität eleganter realisieren~\cite{doc-comparison}.\\
     \\
     Das Pattern-Matching wird in Kotlin durch die Smart-Casts ersetzt~\cite{doc-comparison}.\\
     \\
@@ -331,7 +333,7 @@ fun main() {
     \\
     Checked Exceptions, ein markantes Merkmal der Java-Fehlerbehandlung, existieren in Kotlin nicht mehr~\cite{doc-comparison}.
     Fehlerbehandlung in Kotlin erfolgt stattdessen durch unchecked exceptions oder alternative Ansätze wie das Result-Typ-Pattern.
-    Hierzu bietet Kotlin den \texttt{Result}-Typ, der eine elegante Möglichkeit zur Handhabung von Erfolgen und Fehlern in einer Funktion bietet.\\
+    Hierzu bietet Kotlin den \texttt{Result}-Typ, der eine Möglichkeit zur Handhabung von Erfolgen und Fehlern in einer Funktion bietet.\\
     \\
     Ein weiterer Unterschied liegt in der Sichtbarkeit von Klassen und Mitgliedern.
     Während Java das Schlüsselwort \texttt{package-private} (also ohne Sichtbarkeitsmodifikator) kennt, wurde diese Möglichkeit in Kotlin entfernt~\cite{doc-comparison}.
