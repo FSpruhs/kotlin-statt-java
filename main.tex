@@ -603,19 +603,19 @@ fun main() {
     \subsubsection{Laufzeitverhalten}
 
     In modernen Anwendungen, insbesondere in solchen mit hoher Benutzerinteraktion oder paralleler Datenverarbeitung, spielt effiziente Nebenläufigkeit eine zentrale Rolle.
-    Während sich funktionale Programmierung gut eignet, um nebenläufige Logik deklarativ und fehlerarm zu beschreiben, reicht dies allein nicht aus, um die tatsächliche Ausführung effizient zu gestalten.\\
+    Wie im vorherigen Kapitel beschrieben eignet sich sich die Funktionale Programmierung um die Nebenläufige Logik deklarativ und fehlerarm zu beschreiben.
+    Die Tatsächliche technische ausführung von Nebenläufigkeit wird in Java durch Threads realisiert und in Kotlin durch die Coroutines.\\
     \\
     In Java werden Threads verwendet, um parallele Ausführung zu ermöglichen.
     Ein Java-Thread ist eine 1:1-Abbildung auf einen Betriebssystem-Thread~\cite[940]{insel}.
     Das bedeutet, dass jeder Java-Thread direkt mit einem nativen Thread des Betriebssystems verknüpft ist.
     Jedem Thread wird dabei ein eigener Stack und Speicherbereich zugewiesen.
     Da Threads relativ schwergewichtig sind und mit nicht unerheblichem Overhead verbunden sind, ist die Anzahl parallel laufender Threads begrenzt.
-    Eine zu hohe Thread-Anzahl kann schnell zu einem Mangel an Systemressourcen führen.\\
-    \\
+    Eine zu hohe Thread-Anzahl kann schnell zu einem Mangel an Systemressourcen führen.
     Ein gängiger Lösungsansatz in Java sind sogenannte Thread-Pools.
     Dabei handelt es sich um eine feste Anzahl von Threads, die wiederverwendet werden, um Aufgaben auszuführen.
     Wenn ein Thread im Pool blockiert, kann kein weiterer hinzugefügt werden, bis ein anderer Thread wieder freigegeben wird.
-    Dies kann zu einer suboptimalen Auslastung der Systemressourcen führen.\\
+    Dies kann zu einer suboptimalen Auslastung der Systemressourcen führen~\cite[965-966]{insel}.\\
     \\
     Kotlin bietet mit Coroutines eine leichtgewichtigere Alternative.
     Coroutines ermöglichen eine effizientere und zugleich einfachere Umsetzung von paralleler und asynchroner Programmierung.
@@ -734,8 +734,7 @@ fun main() {
     Ein zentrales Merkmal der Kotlin-Coroutines ist die Unterstützung für Channels, die eine einfache Möglichkeit bieten, Daten zwischen Coroutines zu übermitteln.
     Channels ermöglichen es, dass zwei oder mehr Coroutines effizient und nebenläufig miteinander kommunizieren können.
     Dabei müssen keine Synchronisationsmechanismen wie Locks oder Shared Mutable State verwendet werden.
-    Dies vereinfacht die Entwicklung nebenläufiger Anwendungen erheblich und trägt zur Fehlerminimierung bei~\cite[208]{kotlin-patterns}.\\
-    \\
+    Dies vereinfacht die Entwicklung nebenläufiger Anwendungen erheblich und trägt zur Fehlerminimierung bei~\cite[208]{kotlin-patterns}.
     Channels lassen sich in Kotlin wie Queues verwenden.
     Eine Coroutine sendet Daten in den Channel, eine andere empfängt sie.\\
     \\
@@ -825,16 +824,14 @@ public class JavaChannels {
 
     \subsubsection{Extension Functions}
     Kotlin bietet die Möglichkeit, bestehende Klassen um neue Funktionen zu erweitern, ohne deren Quellcode zu verändern oder von ihnen erben zu müssen.
-    Diese sogenannten Extension Functions können wie reguläre Methoden auf Instanzen aufgerufen werden.\\
-    \\
+    Diese sogenannten Extension Functions können wie reguläre Methoden auf Instanzen aufgerufen werden.
     Besonders praktisch ist, dass sich mit Extension Functions nicht nur eigene Klassen erweitern lassen, sondern auch Klassen aus externen Bibliotheken.
     Dadurch können fehlende Funktionalitäten bequem nachgerüstet werden, ohne bestehende Strukturen zu verändern.\\
     \\
     In Listing~\ref{lst:kotlin-extension-function} wird eine Extension Function \texttt{double} für die Klasse \texttt{String} implementiert.
     Die Definition erfolgt durch Voranstellen des Klassennamens vor den Funktionsnamen, getrennt durch einen Punkt.
     Innerhalb der Funktion kann mit dem Schlüsselwort \texttt{this} auf die aktuelle Instanz zugegriffen werden.
-    Die Methode verdoppelt den Inhalt des Strings und gibt diesen zurück.\\
-    \\
+    Die Methode verdoppelt den Inhalt des Strings und gibt diesen zurück.
     In der \texttt{main}-Methode wird die Funktion zweimal aufgerufen.
     Besonders in Zeile 8 zeigt sich die Eleganz der Kotlin-Syntax.
     Die Erweiterung lässt sich direkt auf dem String-Objekt aufrufen, als wäre sie eine native Methode der \texttt{String}-Klasse.\\
@@ -963,7 +960,7 @@ public class JavaUser {
 
     \subsubsection{Value Classes}
     Value Objects sind ein wichtiger Bestandteil bei der Implementierung von Domain Driven Design(DDD).
-    Ein ziel von von Value Objects im DDD Kontext ist es, die Integrität der Daten zu gewährleisten und sicherzustellen, dass die Objekte in einem konsistenten Zustand sind.
+    Ein ziel von von Value Objects im DDD Kontext ist es, die Integrität der Daten zu Gewährleisten und sicherzustellen, dass die Objekte in einem konsistenten Zustand sind.
     Weiterhin sollen technische Werte wie Int oder String durch Fachliche Werte ersetzt werden~\cite[219]{red-book}.\\
     \\
     Hierzu können in Kotlin Value Classes verwendet werden.
@@ -1013,8 +1010,7 @@ fun main() {
     Voraussetzung ist, dass die Funktion genau einen Parameter hat, der keinen Default-Wert besitzt, und dass sie mit dem Schlüsselwort \texttt{infix} deklariert wurde.\\
     \\
     In Listing~\ref{lst:kotlin-infix-notation} wird die Klasse \texttt{String} um die Funktion \texttt{isLongerThan} erweitert.
-    Diese Funktion vergleicht zwei Strings miteinander und prüft, ob der aktuelle String länger ist als der übergebene.\\
-    \\
+    Diese Funktion vergleicht zwei Strings miteinander und prüft, ob der aktuelle String länger ist als der übergebene.
     In Zeile 10 wird die Funktion mithilfe der Infix-Notation aufgerufen.
     Dabei wird weder ein Punkt noch Klammern benötigt.
     Dadurch ergibt sich ein besonders lesbarer, fast schon natürlicher Code.
@@ -1038,7 +1034,7 @@ fun main() {
 }
     \end{lstlisting}
 
-    \section{Fazit}
+    \section{Fazit und Ausblick}
 
     Kotlin wurde mit dem Anspruch entwickelt, ein besseres und moderneres Java zu sein.
     Um dies umzusetzen, hat Kotlin einige Features eingeführt, die es deutlich von Java abheben und eine spürbare Verbesserung darstellen.\\
@@ -1057,18 +1053,16 @@ fun main() {
     Viele kleine Features lassen sich gut miteinander kombinieren, um das zu erreichen, was in Java nur mit aufwendigen Patterns möglich wäre.
     Das führt zu besser lesbarem Code und weniger Boilerplate.\\
     \\
-    Die wenigen Features, die Java hat und Kotlin nicht, werden häufig durch bessere Lösungen in Kotlin ersetzt.
+    Die wenigen Features, die Java hat und Kotlin nicht, werden häufig durch bessere Lösungen in Kotlin ersetzt (z.B. Pattern Matching, Ternary-Operator).
     Die Features, die Kotlin bewusst nicht übernommen hat, fehlen nicht.
-    Sie waren in Java oft eher problematisch oder unhandlich.\\
-    \\
+    Sie waren in Java oft eher problematisch oder unhandlich (z.B. Checked Exceptions).
     Der größte Vorteil, den Java gegenüber Kotlin hat, ist die riesige Infrastruktur die über Jahrzehnte gewachsen ist.
     Große Communities, umfangreiche Fachliteratur, eine riesige Auswahl an Bibliotheken und Frameworks.
-    Doch dieses Problem, das auch viele andere junge Programmiersprachen betrifft, hat Kotlin durch seine Interoperabilität elegant gelöst.
+    Doch dieses Problem, das auch viele andere junge Programmiersprachen betrifft, hat Kotlin durch seine Interoperabilität gelöst.
     Kotlin kann all diese Ressourcen direkt mitnutzen und startet dadurch nicht bei null.\\
     \\
     Nicht nur bei der Neuentwicklung stellt sich die Frage, ob man Kotlin Java vorziehen sollte.
-    Da sogar langjährig bestehende Java-Projekte nahezu nahtlos mit Kotlin weiterentwickelt werden können, lohnt sich die Überlegung, ob der Umstieg nicht auch dort sinnvoll wäre.\\
-    \\
+    Da sogar langjährig bestehende Java-Projekte nahezu nahtlos mit Kotlin weiterentwickelt werden können, lohnt sich die Überlegung, ob der Umstieg nicht auch dort sinnvoll wäre.
     Dass Kotlin zur offiziellen Standardsprache für die Android-Entwicklung gewählt wurde, ist ein weiteres starkes Zeichen dafür, dass Kotlin auch in Zukunft aktiv weiterentwickelt wird.\\
     \\
     Wenn man sich als Projekt oder Firma im Umfeld der JVM bewegt, sehe ich nur wenige Gründe, nicht darüber nach zu denken auf Kotlin zu wechseln.
@@ -1091,7 +1085,6 @@ fun main() {
     \\
     Ich sehe kein Problem darin, dass Java-Entwickler auf Kotlin umsteigen.
     Anfangs muss man darauf achten, keinen Java-Code mit Kotlin-Syntax zu schreiben.
-    Aber dafür gibt es zahlreiche gute Tutorials die genau das zeigen.
     Der Umstieg macht vor allem eines: viel Spaß!\\
     \\
     Im Vergleich zu anderen modernen Sprachen wie Go oder Rust fehlen Kotlin zwar noch ein paar Features, die ich mir wünschen würde.
