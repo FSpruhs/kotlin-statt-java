@@ -96,11 +96,11 @@
     Kotlin ist eine relativ neue Programmiersprache, die 2011 von JetBrains veröffentlicht wurde.
     Sie wurde mit dem Ziel entwickelt, eine moderne und verbesserte Alternative zu Java zu schaffen~\cite[19]{kotlin-handbuch}.\\
     \\
-    In diesem Text werden die Unterschiede zwischen Java und Kotlin untersucht.
+    In dieser Arbeit werden Java und Kotlin verglichen.
     Es wird untersucht, inwieweit Kotlin eine geeignete Alternative zu Java darstellt und welche Vorteile Kotlin gegenüber Java bietet.
     Zunächst werden beide Programmiersprachen kurz vorgestellt.
     Anschließend wird auf die Interoperabilität zwischen Java und Kotlin eingegangen.
-    Dabei soll gezeigt werden, inwieweit sich Java und Kotlin in einem Projekt kombinieren lassen, bzw. wie bestehende Java-Projekte mit Kotlin weitergeführt werden können.\\
+    Dabei wird gezeigt, inwieweit sich Java und Kotlin in einem Projekt kombinieren lassen bzw. wie bestehende Java-Projekte mit Kotlin weitergeführt werden können.\\
     \\
     Danach werden die unterschiedlichen Features der Sprachen untersucht.
     Zuerst gibt es eine kurze Übersicht über die Features die Kotlin von Java unterscheiden.
@@ -109,7 +109,7 @@
     Wie diese Features konkret genutzt werden kann nur am Rande besprochen werden, da dies den Umfang des Textes sprengen würde.\\
     \\
     Zum Schluss gibt es ein Fazit und eine kurze Zusammenfassung der Ergebnisse.
-    Die Codebeispiele in diesem Text können auf GitHub unter \url{github.com/FSpruhs/kotlin-statt-java} gefunden werden und können alle, zu Testzwecken, selber ausgeführt werden.\\
+    Die Codebeispiele in diesem Text können auf GitHub unter \url{github.com/FSpruhs/kotlin-statt-java} gefunden und können alle, zu Testzwecken selber ausgeführt werden.\\
     \\
     \section{Kurzvorstellung Java}
 
@@ -124,11 +124,11 @@
 
     \subsection{Technischer Hintergrund}
     Java ist eine Programmiersprache, die von Sun Microsystems entwickelt und im Jahr 1995 veröffentlicht wurde.
-    Sie zeichnet sich durch ihre Plattformunabhängigkeit, hohe Robustheit und vielseitigen Einsatzmöglichkeiten aus,wodurch sie insbesondere in der Industrie und im Unternehmensumfeld eine zentrale Rolle spielt~\cite[55]{insel}.\\
+    Sie zeichnet sich durch ihre Plattformunabhängigkeit, hohe Robustheit und vielseitigen Einsatzmöglichkeiten aus, wodurch sie insbesondere in der Industrie und im Unternehmensumfeld eine zentrale Rolle spielt~\cite[55]{insel}.\\
     \\
     Ein wesentliches Merkmal von Java ist die Art der Code-Ausführung.
     Anstatt direkt in Maschinencode übersetzt zu werden, wird der Quellcode zunächst in Bytecode kompiliert.
-    Dieser Bytecode wird anschließend von der Java Virtual Machine (JVM) interpretiert und ausgeführt.
+    Dieser Bytecode wird anschließend zur Laufzeit von der Java Virtual Machine (JVM) interpretiert und ausgeführt.
     Durch dieses Konzept ist Java nicht an eine spezifische Prozessorarchitektur oder ein bestimmtes Betriebssystem gebunden, was eine hohe Portabilität gewährleistet.
     Diese Plattformunabhängigkeit stellt einen bedeutenden Vorteil dar, den viele andere Programmiersprachen im Laufe der Zeit übernommen haben~\cite[52]{insel}.\\
     \\
@@ -152,7 +152,7 @@
     Auch im Februar 2025 belegte Java den dritten Platz im TIOBE-Index (siehe Abbildung~\ref{fig:tiobe-java-2025}).\\
     \\
     Java ist die Basis zahlreicher Anwendungen und wird in vielfältigen Bereichen eingesetzt.
-    Darüber hinaus verfügt Java über eine umfangreiche Ökosystemlandschaft mit einer Vielzahl an Bibliotheken, Paketen, Frameworks und Fachliteratur~\cite[55]{insel}.\\
+    Darüber hinaus verfügt Java über eine umfangreiche Ökosystemlandschaft mit einer unüberschaubaren Anzahl an Bibliotheken, Paketen, Frameworks und Fachliteratur~\cite[55]{insel}.\\
     \\
     Die weltweite Java-Community ist äußerst aktiv und umfasst eine große Anzahl an erfahrenen Entwicklern, die kontinuierlich zum Wissenstransfer und zur Weiterentwicklung der Sprache beitragen.
     Ein Beispiel für die Größe dieser Infrastruktur ist das Maven-Repository, das über 2.800 Repositories mit mehr als 52 Millionen Java-Paketen enthält~\cite{maven}.\\
@@ -160,34 +160,34 @@
     Diese etablierte und breit aufgestellte Infrastruktur stellt einen weiteren entscheidenden Vorteil von Java dar und
     trägt zu seiner anhaltenden Relevanz in der Softwareentwicklung bei.\\
 
-    \section{Kurzvorstellung kotlin}
+    \section{Kurzvorstellung Kotlin}
 
     \subsection{Übersicht}
     \begin{itemize}
         \item \textbf{Erscheinungsjahr:} 2011
         \item \textbf{Entwickler:} Jetbrains
-        \item \textbf{Programmier paradigmen:} objektorientiert, funktional
+        \item \textbf{Programmierparadigmen:} objektorientiert, funktional
         \item \textbf{Aktuelle LTS version:} 2.1.0
     \end{itemize}
 
     \subsection{Technischer Hintergrund}
     Kotlin wurde 2011 von der Firma JetBrains veröffentlicht.
     Ziel der Entwicklung war es, eine verbesserte Alternative zu Java zu schaffen~\cite[19]{kotlin-handbuch}.
-    Schon an der Namensgebung kann man die nähe zu Java erkennen.
+    Schon an der Namensgebung kann man die Nähe zu Java erkennen.
     Der Name Java bezieht sich auf eine Indonesische Insel.
     Der Namensgeber von Kotlin ist eine russische Insel vor St. Petersburg.\\
     \\
     Obwohl Java nur etwa 15 Jahre älter als Kotlin ist, stellt dies in der schnelllebigen Welt der Softwareentwicklung eine erhebliche Zeitspanne dar.
     In vielerlei Hinsicht wirkt Java inzwischen veraltet.
-    Die Syntax ist vergleichsweise umständlich, und einige moderne Sprachfeatures, wurden erst später realisiert und wurden daher nicht perfekt in die Sprache integriert~\cite[19]{kotlin-handbuch}.
+    Die Syntax ist vergleichsweise umständlich und einige moderne Sprachfeatures wurden erst später realisiert und daher nicht perfekt in die Sprache integriert~\cite[19]{kotlin-handbuch}.
     Zudem setzt Java ausschließlich auf das objektorientierte Paradigma, während moderne Programmiersprachen häufig eine Kombination aus objektorientierter und funktionaler Programmierung unterstützen.
     Hierzu gehören z.B. Go~\cite[34]{go} oder Rust~\cite[105]{rust}.
-    Bei beiden Sprachen wird zugunsten der ausführungsgeschwindigkeit darauf verzichtet ein rein objektorientiert Sprache anzubieten.\\
+    Bei beiden Sprachen wird zugunsten der Ausführungsgeschwindigkeit darauf verzichtet ein rein objektorientiert Sprache anzubieten.\\
     \\
     Bei der Entwicklung von Kotlin hat JetBrains bewusst aus den Designfehlern von Java gelernt.
     Gleichzeitig wurden essenzielle Eigenschaften, die zur Popularität von Java beigetragen haben, beibehalten~\cite[20]{kotlin-handbuch}.\\
     \\
-    Kotlin-Code kann ebenfalls in Bytecode kompiliert und kann auf der Java Virtual Machine (JVM) ausgeführt werden~\cite{kotlin-compile}.
+    Kotlin-Code kann ebenfalls in Bytecode kompiliert und auf der Java Virtual Machine (JVM) ausgeführt werden~\cite{kotlin-compile}.
     Dies bietet den großen Vorteil, dass Kotlin-Programme überall dort lauffähig sind, wo auch Java-Code ausgeführt werden kann.
     Zudem kann Kotlin dadurch auf sämtliche vorhandenen Java-Bibliotheken zugreifen und diese nutzen, wodurch nahezu das gesamte Java-Ökosystem zur Verfügung steht~\cite[20]{kotlin-handbuch}.
     Die Interoperabilität zwischen Kotlin und Java geht sogar noch weiter.
@@ -196,7 +196,7 @@
     \\
     \subsection{Verbreitung}
     Nach dem TIOBE index befindet sich Kotlin im März 2025 nur auf Platz 19 der relevantesten Sprachen, siehe Abbildung~\ref{fig:tiobe-kotlin-2025}.
-    Es gibt aber auch gute Nachrichten für Kotlin im Bezug auf die Verbreitung und relevanz.
+    Es gibt aber auch gute Nachrichten für Kotlin im Bezug auf die Verbreitung und Relevanz.
     Kotlin wurde von Google zu der bevorzugten Sprache für die Android Entwicklung erklärt~\cite{tn3-google}.\\
     \\
     \section{Interoperabilität zwischen Java und Kotlin}
@@ -207,7 +207,7 @@
     Zum anderen ermöglicht diese Interoperabilität, bestehende Java-Projekte schrittweise mit Kotlin weiterzuentwickeln oder nach und nach auf Kotlin umzustellen, ohne den vorhandenen Code sofort ersetzen zu müssen.
     Dies ist besonders für Unternehmen mit großen Java-Codebasen relevant, die nicht abrupt auf Kotlin wechseln können~\cite[20]{kotlin-handbuch}.\\
     \\
-    Im folgenden Beispiel werden verschiedene Möglichkeiten vorgestellt, wie Kotlin-Code in einer Java-Umgebung ausgeführt werden kann.
+    Im folgenden Beispiel wird vorgestellt, wie Kotlin-Code in einer Java-Umgebung ausgeführt werden kann.
     Die zugehörige \texttt{.java}-Datei enthält eine Java-Klasse mit einer \texttt{main}-Methode.
     In dieser Datei wird Kotlin-Code aus einer \texttt{.kt}-Datei importiert und ausgeführt, da Kotlin-Quellcode stets
     in Dateien mit der Endung \texttt{.kt} gespeichert wird.\\
@@ -267,7 +267,7 @@ public static void main(String[] args) {
     Im folgenden Beispiel werden zwei verschiedene Arten gezeigt, wie Java-Klassen in Kotlin eingebunden werden können.
     Einmal über eine Instanzmethode und einmal über eine statische Methode.\\
     \\
-    Die Integration von Java in Kotlin ist besonders einfach, da Kotlin die Java-Klassen so behandelt, als wären sie eigene Kotlin-Klassen.
+    Die Integration von Java in Kotlin ist deshalb so einfach, da Kotlin die Java-Klassen so behandelt, als wären sie eigene Kotlin-Klassen.
     Statische Methoden und Felder werden in Kotlin über den Klassennamen aufgerufen, Instanzmethoden funktionieren analog wie in Kotlin selbst.
     Damit bietet Kotlin ein hohes Maß an Interoperabilität mit Java, was den Umstieg oder die parallele Nutzung beider Sprachen deutlich vereinfacht~\cite{kotlin-java-in-kotlin}.\\
     \\
@@ -306,16 +306,16 @@ fun main() {
         Hello from java static method!\\
     \end{tcolorbox}
 
-    \section{Features}
+    \section{Kotlin Features}
 
     \subsection{Kurzübersicht}
 
     In der folgenden Tabelle~\ref{tab:kotlin-java-features} werden zentrale Sprachfeatures aufgeführt, durch die sich Kotlin von Java unterscheidet.
-    Anschließend werden einige der wichtigsten Unterschiede genauer erläutert.\\
+    Anschließend werden einige der wichtigsten Unterschiede der beiden Sprachen genauer erläutert.\\
     \\
     Bei den Features, die Java besitzt, die aber in Kotlin nicht mehr vorhanden sind, lässt sich zwischen vollständig entfallenen Funktionen und solchen unterscheiden, die durch alternative Konzepte ersetzt wurden.\\
     \\
-    Ein klassisches Beispiel hierfür sind \texttt{static} Members.
+    Ein typisches Beispiel hierfür sind \texttt{static} Members.
     Kotlin kennt das \texttt{static}-Schlüsselwort nicht.
     Stattdessen bietet Kotlin das Konzept der \texttt{Companion Objects}, um Klassenfunktionen und Klasseneigenschaften zu definieren, die unabhängig von einer konkreten Instanz verfügbar sein sollen~\cite{kotlin-static-members}.\\
     \\
@@ -329,7 +329,7 @@ fun main() {
     \\
     Die mit Java 14 eingeführten \texttt{Records}, die als einfache, immutable Datencontainer dienen, gibt es in Kotlin so nicht~\cite{jdk-record}.
     Dafür wurde in Kotlin die \texttt{data class} eingeführt.
-    Diese bieten ähnliche Vorteile, wie automatische Implementierungen von \texttt{equals()}, \texttt{hashCode()} und \texttt{toString()}~\cite{kotlin-data-class}.\\
+    Diese bieten ähnliche Vorteile, wie automatische Implementierungen von \texttt{equals()}, \texttt{hashCode()}, \texttt{toString()} und Getter/Setter-Methoden~\cite{kotlin-data-class}.\\
     \\
     Checked Exceptions, ein markantes Merkmal der Java-Fehlerbehandlung, existieren in Kotlin nicht mehr~\cite{doc-comparison}.
     Fehlerbehandlung in Kotlin erfolgt stattdessen durch unchecked exceptions oder alternative Ansätze wie das Result-Typ-Pattern.
@@ -504,7 +504,7 @@ public class NullHandlingExample {
     Die funktionale Programmierung hat in den letzten Jahren zunehmend an Bedeutung gewonnen.
     Ein wesentlicher Grund dafür liegt in der stagnierenden Entwicklung der CPU-Geschwindigkeit.
     Während in früheren Jahren Leistungssteigerungen hauptsächlich durch höhere Taktfrequenzen erzielt wurden, liegt der Fokus heute verstärkt auf Mehrkernprozessoren.
-    Daraus ergibt sich die Notwendigkeit, Programme parallel auszuführen, um die vorhandenen Ressourcen effizient zu nutzen.
+    Daraus ergibt sich die Möglichkeit, Programme parallel auszuführen, um die vorhandenen Ressourcen effizient zu nutzen.
     Die funktionale Programmierung eignet sich besonders gut für Parallelisierungskonzepte, da sie auf Zustandslosigkeit und Nebenwirkungsfreiheit basiert.
     Diese Eigenschaften vereinfachen die Ausführung von Code und machen sie zugleich sicherer~\cite[129]{kotlin-patterns}.\\
     \\
@@ -573,7 +573,7 @@ public class HigherOrderJava {
     Ein vergleichbares Feature in Java sind Lambda-Ausdrücke.
     Diese bieten jedoch nicht den gleichen Grad an Optimierung wie die Inline-Funktionen in Kotlin.
     Bei einer Inline-Funktion wird der Funktionscode direkt an der Aufrufstelle in den Bytecode eingefügt, anstatt zur Laufzeit aufgerufen zu werden.
-    Dadurch wird der Overhead vermieden, der bei normalen Funktionsaufrufen entsteht.\\
+    Dadurch wird der Overhead zur Laufzeit vermieden, der bei normalen Funktionsaufrufen entsteht.\\
     \\
     Listing~\ref{lst:kotlin-inline-function} zeigt eine Inline-Funktion in Kotlin.
     Die Funktion \texttt{transformString} nimmt einen \texttt{String} sowie eine Funktion entgegen, die einen \texttt{String} als Parameter akzeptiert und ebenfalls einen \texttt{String} zurückgibt.
@@ -603,8 +603,8 @@ fun main() {
     \subsubsection{Laufzeitverhalten}
 
     In modernen Anwendungen, insbesondere in solchen mit hoher Benutzerinteraktion oder paralleler Datenverarbeitung, spielt effiziente Nebenläufigkeit eine zentrale Rolle.
-    Wie im vorherigen Kapitel beschrieben eignet sich sich die Funktionale Programmierung um die Nebenläufige Logik deklarativ und fehlerarm zu beschreiben.
-    Die Tatsächliche technische ausführung von Nebenläufigkeit wird in Java durch Threads realisiert und in Kotlin durch die Coroutines.\\
+    Wie im vorherigen Kapitel beschrieben eignet sich sich die Funktionale Programmierung um die nebenläufige Logik deklarativ und fehlerarm zu beschreiben.
+    Die tatsächliche technische Ausführung von Nebenläufigkeit wird in Java durch Threads realisiert und in Kotlin durch die Coroutines.\\
     \\
     In Java werden Threads verwendet, um parallele Ausführung zu ermöglichen.
     Ein Java-Thread ist eine 1:1-Abbildung auf einen Betriebssystem-Thread~\cite[940]{insel}.
@@ -632,12 +632,12 @@ fun main() {
     Die Ausführungszeiten sind in Tabelle~\ref{tab:coroutine-thread-pool} dargestellt.
     Hier zeigt sich deutlich der Effizienzvorteil von Coroutines.
     Sie sind deutlich schneller als Threads, da sie ressourcenschonender arbeiten und nicht direkt an System-Threads gebunden sind.
-    Mehrere Coroutines können gleichzeitig auf einem Thread laufen, da blockierende Operationen den Thread nicht blockieren.
+    Mehrere Coroutines an sich können gleichzeitig auf einem Thread laufen, da blockierende Operationen nicht den Thread blockieren.
     Der Dispatcher übernimmt das Scheduling und sorgt dafür, dass nur aktive Coroutines weiter ausgeführt werden.\\
     \\
-    Umso mehr Threads genutzt werden, desto schneller wird die Ausführungszeit.
-    Zwischen 2.500 und 5.000 Threads ist die Ausführungszeit fast gleich.
-    Dafür ist aber der Speicherverbrauch deutlich höher.
+    Je mehr Threads genutzt werden, desto schneller wird die Ausführungszeit.
+    Bei 2.500 und 5.000 Threads ist die Ausführungszeit fast gleich zu den Coroutines.
+    Dafür ist aber der Speicherverbrauch bei Threads deutlich höher.
     Ab 10.000 Threads, also genau der Anzahl an Iterationen, kommt es sogar zu einem \texttt{OutOfMemoryError}.\\
     \\
     Dieses Beispiel verdeutlicht, dass Coroutines eine deutlich leichtgewichtigere und skalierbarere Alternative zu klassischen Threads darstellen.
@@ -731,7 +731,7 @@ fun main() {
     \end{table}
     
     \subsubsection{Channels}
-    Ein zentrales Merkmal der Kotlin-Coroutines ist die Unterstützung für Channels, die eine einfache Möglichkeit bieten, Daten zwischen Coroutines zu übermitteln.
+    Ein zentrales Merkmal der Kotlin-Coroutines ist die Unterstützung durch Channels, die eine einfache Möglichkeit bieten, Daten zwischen Coroutines zu übermitteln.
     Channels ermöglichen es, dass zwei oder mehr Coroutines effizient und nebenläufig miteinander kommunizieren können.
     Dabei müssen keine Synchronisationsmechanismen wie Locks oder Shared Mutable State verwendet werden.
     Dies vereinfacht die Entwicklung nebenläufiger Anwendungen erheblich und trägt zur Fehlerminimierung bei~\cite[208]{kotlin-patterns}.
@@ -744,7 +744,7 @@ fun main() {
     \\
     In Listing~\ref{lst:java-channels} wird das gleiche Beispiel in Java umgesetzt.
     Hier gibt es jedoch keine native Unterstützung für Channels, wie Kotlin sie bietet.
-    Um ein ähnliches Verhalten zu erreichen, kann eine BlockingQueue verwendet werden, wobei jedoch auf die Synchronisation und die korrekte Beendigung selbst geachtet werden muss.
+    Um ein ähnliches Verhalten zu erreichen, kann eine BlockingQueue verwendet werden, wobei jedoch der Programmierer auf die Synchronisation und die korrekte Beendigung selbst achten muss.
     In der Java-Version müssen eigene Threads erzeugt werden, und zur Signalisierung des Endes dient ein spezieller Wert (-1), da es keine eingebaute close()-Funktion wie bei Kotlin-Channels gibt.\\
     \\
 
@@ -816,22 +816,22 @@ public class JavaChannels {
 }
     \end{lstlisting}
 
-    \subsection{Syntax verbesserungen}
+    \subsection{Syntaxverbesserungen}
     Kotlin bietet eine Vielzahl von Sprachfeatures, die darauf abzielen, den Code kompakter, lesbarer und weniger fehleranfällig zu machen.
     Viele dieser Konzepte lassen sich grundsätzlich auch in Java umsetzen, erfordern dort jedoch deutlich mehr Boilerplate-Code und führen zu weniger übersichtlichem Quelltext.
     Auch wenn man einige dieser Features als „Syntax-Sugar“ bezeichnen könnte, ergibt sich durch deren Zusammenspiel ein spürbarer Mehrwert in Bezug auf Produktivität und Wartbarkeit.
-    Im Folgenden werden die wichtigsten dieser Sprachfeatures vorgestellt und ihre Vorteile gegenüber Java erläutert.
+    Im Folgenden werden die wichtigsten dieser Kotlin Sprachfeatures vorgestellt und ihre Vorteile gegenüber Java erläutert.
 
     \subsubsection{Extension Functions}
     Kotlin bietet die Möglichkeit, bestehende Klassen um neue Funktionen zu erweitern, ohne deren Quellcode zu verändern oder von ihnen erben zu müssen.
-    Diese sogenannten Extension Functions können wie reguläre Methoden auf Instanzen aufgerufen werden.
+    Diese sogenannten Extension Functions werden wie reguläre Methoden auf Instanzen aufgerufen.
     Besonders praktisch ist, dass sich mit Extension Functions nicht nur eigene Klassen erweitern lassen, sondern auch Klassen aus externen Bibliotheken.
     Dadurch können fehlende Funktionalitäten bequem nachgerüstet werden, ohne bestehende Strukturen zu verändern.\\
     \\
-    In Listing~\ref{lst:kotlin-extension-function} wird eine Extension Function \texttt{double} für die Klasse \texttt{String} implementiert.
+    In Listing~\ref{lst:kotlin-extension-function} wird eine Extension Function \texttt{repeat} für die Klasse \texttt{String} implementiert.
     Die Definition erfolgt durch Voranstellen des Klassennamens vor den Funktionsnamen, getrennt durch einen Punkt.
     Innerhalb der Funktion kann mit dem Schlüsselwort \texttt{this} auf die aktuelle Instanz zugegriffen werden.
-    Die Methode verdoppelt den Inhalt des Strings und gibt diesen zurück.
+    Die Methode wiederholt den Inhalt des Strings und gibt diesen zurück.
     In der \texttt{main}-Methode wird die Funktion zweimal aufgerufen.
     Besonders in Zeile 8 zeigt sich die Eleganz der Kotlin-Syntax.
     Die Erweiterung lässt sich direkt auf dem String-Objekt aufrufen, als wäre sie eine native Methode der \texttt{String}-Klasse.\\
@@ -843,13 +843,13 @@ public class JavaChannels {
 
     \begin{lstlisting}[language=Kotlin, caption={ExtensionFunction.kt}, label={lst:kotlin-extension-function}]
 
-fun String.double(): String {
+fun String.repeat(): String {
     return "$this $this"
 }
 
 fun main() {
-    val name = "Hello World!".double()
-    println(name.double()) // Output: Hello World! Hello World! Hello World! Hello World!
+    val name = "Hello World!".repeat()
+    println(name.repeat()) // Output: Hello World! Hello World! Hello World! Hello World!
 }
     \end{lstlisting}
 
@@ -966,14 +966,14 @@ public class JavaUser {
     Hierzu können in Kotlin Value Classes verwendet werden.
     Diese sind eine spezielle Art von Klassen, die dazu dienen, einen einzelnen Primitiven Wert zu kapseln und zusätzliche Funktionalität bereitzustellen.
     Zur Laufzeit werden diese Value Classes in den entsprechenden Primitiven Typen umgewandelt.
-    Man hat also auf der einen Seite die Laufzeit vorteile von Primitiven Typen und auf der anderen Seite die Typsicherheit und auf der anderen Seite die Möglichkeit, zusätzliche Funktionalität und validierung hinzuzufügen~\cite{kotlin-value-classes}.\\
+    Man hat also die Laufzeitvorteile von Primitiven Typen, die Typsicherheit und die Möglichkeit, zusätzliche Funktionalität und Validierung hinzuzufügen~\cite{kotlin-value-classes}.\\
     \\
     In Listing~\ref{lst:kotlin-value-classes} wird eine Value Class \texttt{NickName} und \texttt{Age} implementiert.
-    Dazu wird die Annotation \texttt{@JvmInline} verwendet und das Schlüsselwort value.
+    Dazu wird die Annotation \texttt{@JvmInline} und das Schlüsselwort value verwendet.
     In der Klasse \texttt{Person} werden die Value Classes als Parameter verwendet.
-    In der Klassen Deklaration wird beim erstellen der Klasse die der Code in dem \texttt{init} Block ausgeführt.
-    Diese werden hier zum validieren der Werte verwendet.
-    Eine entsprechende Implementierung in Java ist nicht möglich, da Java keine Value Classes unterstützt.\\
+    In der Klassen Deklaration wird beim Erstellen der Klasse der Code in dem \texttt{init} Block ausgeführt.
+    Diese werden hier zum Validieren der Werte verwendet.
+    Ein entsprechendes Beispiel in Java ist nicht möglich, da Java keine Value Classes unterstützt.\\
     \\
 
     \begin{lstlisting}[language=Kotlin, caption={ValueClasses.kt}, label={lst:kotlin-value-classes}]
@@ -1007,15 +1007,16 @@ fun main() {
 
     \subsubsection{Infix Notation}
     Mit der Infix-Notation können Funktionen, insbesondere Extension- oder Member-Funktionen, in einer besonders kompakten und lesbaren Form aufgerufen werden.
-    Voraussetzung ist, dass die Funktion genau einen Parameter hat, der keinen Default-Wert besitzt, und dass sie mit dem Schlüsselwort \texttt{infix} deklariert wurde.\\
+    Voraussetzung ist, dass die Funktion genau einen Parameter hat, dieser keinen Default-Wert besitzt und dass diese Funktion mit dem Schlüsselwort \texttt{infix} deklariert wurde.\\
     \\
     In Listing~\ref{lst:kotlin-infix-notation} wird die Klasse \texttt{String} um die Funktion \texttt{isLongerThan} erweitert.
     Diese Funktion vergleicht zwei Strings miteinander und prüft, ob der aktuelle String länger ist als der übergebene.
-    In Zeile 10 wird die Funktion mithilfe der Infix-Notation aufgerufen.
+    In Zeile 9 wird die Funktion mithilfe der Infix-Notation aufgerufen.
     Dabei wird weder ein Punkt noch Klammern benötigt.
-    Dadurch ergibt sich ein besonders lesbarer, fast schon natürlicher Code.
-    In Zeile 11 wird dieselbe Funktion regulär mit Punkt- und Klammernotation aufgerufen.
-    Beide Varianten haben denselben Effekt~\cite{kotlin-infix-notation}.\\
+    Dadurch ergibt sich ein besonders lesbarer Code.
+    Dieser ähnelt schon fast natürlicher Sprache.
+    In Zeile 10 wird dieselbe Funktion regulär mit Punkt- und Klammernotation aufgerufen.
+    Beide Varianten haben führen zum selben Ergebnis~\cite{kotlin-infix-notation}.\\
     \\
     Die Infix-Notation kann dazu beitragen, bestimmte Ausdrücke wie z.B. mathematische oder domänenspezifische Operationen intuitiver lesbar zu gestalten.\\
     \\
@@ -1047,38 +1048,38 @@ fun main() {
     Hier bietet Kotlin mit seinen Coroutines eine elegante und einfache Möglichkeit zur Umsetzung.
     Der bessere Ressourceneinsatz ist ein weiterer Grund, nicht mehr auf klassische Threads zu setzen.\\
     \\
-    Dies sind wohl die drei wichtigsten Argumente, die eine klare Tendenz zu Kotlin geben.
+    Dies sind wohl die drei wichtigsten Argumente, die eine klare Tendenz in Richtung Kotlin weisen.
     Kotlin bietet darüber hinaus eine deutlich schlankere Syntax.
     Der Compiler hilft dabei, Typen zu erkennen, sodass diese oft gar nicht mehr explizit genannt werden müssen.
-    Viele kleine Features lassen sich gut miteinander kombinieren, um das zu erreichen, was in Java nur mit aufwendigen Patterns möglich wäre.
+    Viele kleine Features lassen sich gut miteinander kombinieren, um das zu erreichen, was in Java nur mit aufwendigen Patterns umgesetzt werden könnte.
     Das führt zu besser lesbarem Code und weniger Boilerplate.\\
     \\
     Die wenigen Features, die Java hat und Kotlin nicht, werden häufig durch bessere Lösungen in Kotlin ersetzt (z.B. Pattern Matching, Ternary-Operator).
-    Die Features, die Kotlin bewusst nicht übernommen hat, fehlen nicht.
+    Die Java Features, die Kotlin bewusst nicht übernommen hat, fehlen nicht.
     Sie waren in Java oft eher problematisch oder unhandlich (z.B. Checked Exceptions).
-    Der größte Vorteil, den Java gegenüber Kotlin hat, ist die riesige Infrastruktur die über Jahrzehnte gewachsen ist.
+    Der größte Vorteil, den Java gegenüber Kotlin hat, ist die riesige Infrastruktur, die über Jahrzehnte gewachsen ist.
     Große Communities, umfangreiche Fachliteratur, eine riesige Auswahl an Bibliotheken und Frameworks.
-    Doch dieses Problem, das auch viele andere junge Programmiersprachen betrifft, hat Kotlin durch seine Interoperabilität gelöst.
-    Kotlin kann all diese Ressourcen direkt mitnutzen und startet dadurch nicht bei null.\\
+    Doch dieses Problem, das auch viele andere junge Programmiersprachen betrifft, hat Kotlin durch seine Interoperabilität mit Java gelöst.
+    Kotlin kann diese gesamten Ressourcen direkt mitnutzen und startet dadurch nicht bei null.\\
     \\
     Nicht nur bei der Neuentwicklung stellt sich die Frage, ob man Kotlin Java vorziehen sollte.
-    Da sogar langjährig bestehende Java-Projekte nahezu nahtlos mit Kotlin weiterentwickelt werden können, lohnt sich die Überlegung, ob der Umstieg nicht auch dort sinnvoll wäre.
+    Da sogar langjährig bestehende Java-Projekte nahezu nahtlos mit Kotlin weiterentwickelt werden können, lohnt sich die Überlegung, ob der Umstieg auf Kotlin nicht auch dort sinnvoll wäre.
     Dass Kotlin zur offiziellen Standardsprache für die Android-Entwicklung gewählt wurde, ist ein weiteres starkes Zeichen dafür, dass Kotlin auch in Zukunft aktiv weiterentwickelt wird.\\
     \\
-    Wenn man sich als Projekt oder Firma im Umfeld der JVM bewegt, sehe ich nur wenige Gründe, nicht darüber nach zu denken auf Kotlin zu wechseln.
+    Wenn man sich als Firma im Umfeld der JVM bewegt, sehe ich nur wenige Gründe, nicht darüber nach zu denken, auf Kotlin zu wechseln.
     Die bisher eingesetzten Java Tools, Bibliotheken und Frameworks können weiterhin eingesetzt werden.
-    So können die Entwickler viel von den wissen und Techniken die Sie über die Jahre aufgebaut haben einfach weiter verwenden.
-    Nur die Sprache mit der Sie diese benutzten wird ausgetauscht.\\
+    So können die Entwickler viel von den Wissen und Techniken die Sie über die Jahre aufgebaut haben, einfach weiter verwenden.
+    Nur die Sprache, mit der Sie diese benutzten, wird ausgetauscht.\\
     \\
     Ich selbst arbeite seit mehreren Jahren als Java-Fullstack-Consultant in verschiedenen Projekten.
     Seit April 2024 bin ich nun in meinem ersten Projekt, das im Backend ausschließlich Kotlin einsetzt.
     Die Einarbeitung in die neue Sprache war dabei kein Problem.
-    Die neuen Features konnte ich sehr schnell in mein Repertoire aufnehmen.\\
+    Die neuen Features habe ich sehr schnell in mein Repertoire aufgenommen.\\
     \\
     Kotlin bietet unzählige kleine Funktionen und Sprachfeatures, die zu schönerem und besser lesbarem Code führen.
     Hierzu gehören etwa scoped functions wie \texttt{also}, \texttt{apply} oder \texttt{let}, oder hilfreiche Utility-Funktionen wie \texttt{associateBy()}.
-    Der Vorteil dieser Features lässt sich schwer in so einem Text wie diesen beschreiben.
-    Man muss sie selbst erleben um den "Flow" den Kotlin bietet zu verstehen.\\
+    Der Vorteil dieser Features lässt sich in diesem Text nur unzureichend beschreiben.
+    In der Praktischen Arbeit mit Kotlin erlebt man dafür den "Flow", den Kotlin bietet.\\
     \\
     Seit ich mit Kotlin arbeite, möchte ich nicht mehr zurück in die alte Java-Welt.
     Ich hoffe, dass mein nächstes Projekt ebenfalls auf Kotlin setzen wird.\\
