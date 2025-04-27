@@ -73,7 +73,7 @@
 
     \begin{titlepage}
         \centering
-        {\scshape\LARGE Seminar 1908 Moderne Programmiertechniken und -Methoden -Sommer 2025 \par}
+        {\scshape\LARGE Seminar 1908 \\ Moderne Programmiertechniken und -Methoden \\ -Sommer 2025 \par}
         \vspace{1cm}
         {\huge\bfseries Kotlin statt Java\par}
         \vspace{1.5cm}
@@ -104,7 +104,7 @@
     \\
     Danach werden die unterschiedlichen Features der Sprachen untersucht.
     Zuerst gibt es eine kurze Übersicht über die Features die Kotlin von Java unterscheiden.
-    Danach werden die wichtigsten Features genauer erläutert, also die Features die einen tatsächlichen Mehrwert bieten.
+    Anschliessend werden die wichtigsten Features, die einen tatsächlichen Mehrwert bieten, genauer erläutert.
     Dabei wird hauptsächlich auf die Unterschiede zwischen Java und Kotlin eingegangen.
     Wie diese Features konkret genutzt werden kann nur am Rande besprochen werden, da dies den Umfang des Textes sprengen würde.\\
     \\
@@ -313,7 +313,7 @@ fun main() {
     In der folgenden Tabelle~\ref{tab:kotlin-java-features} werden zentrale Sprachfeatures aufgeführt, durch die sich Kotlin von Java unterscheidet.
     Anschließend werden einige der wichtigsten Unterschiede der beiden Sprachen genauer erläutert.\\
     \\
-    Bei den Features, die Java besitzt, die aber in Kotlin nicht mehr vorhanden sind, lässt sich zwischen vollständig entfallenen Funktionen und solchen unterscheiden, die durch alternative Konzepte ersetzt wurden.\\
+    Bei den Features, die Java besitzt, die aber in Kotlin nicht mehr vorhanden sind, lässt sich unterscheiden zwischen vollständig entfallenen Funktionen und solchen, die durch alternative Konzepte ersetzt wurden.\\
     \\
     Ein typisches Beispiel hierfür sind \texttt{static} Members.
     Kotlin kennt das \texttt{static}-Schlüsselwort nicht.
@@ -322,7 +322,7 @@ fun main() {
     Auch das in Java etablierte Konzept der Wildcards (wie \texttt{? extends T} oder \texttt{? super T}) zur Variabilität in generischen Typen wird in Kotlin nicht verwendet.
     An dessen Stelle treten in Kotlin zwei modernere Mechanismen: die Declaration-Site Variance (z.B. \texttt{out T} oder \texttt{in T}) und \texttt{Type Projections}, die eine bessere Lesbarkeit und Typensicherheit ermöglichen~\cite{doc-comparison}.\\
     \\
-    Der aus Java bekannte Ternary-Operator (\texttt{condition ? trueExpr : falseExpr}) entfällt in Kotlin vollständig, da \texttt{if}-Anweisungen dort als Ausdrücke gestaltet sind und somit selbst einen Wert zurückgeben können.
+    Der aus Java bekannte Ternary-Operator (\texttt{condition ? trueExpr : falseExpr}) entfällt in Kotlin vollständig, da \texttt{if-else}-Anweisungen dort als Ausdrücke gestaltet sind und somit selbst einen Wert zurückgeben können.
     Dadurch lässt sich die gleiche Funktionalität eleganter realisieren~\cite{doc-comparison}.\\
     \\
     Das Pattern-Matching wird in Kotlin durch die Smart-Casts ersetzt~\cite{doc-comparison}.\\
@@ -499,7 +499,7 @@ public class NullHandlingExample {
 }
     \end{lstlisting}
 
-    \subsection{Funktionale Programierung}
+    \subsection{Funktionale Programmierung}
 
     Die funktionale Programmierung hat in den letzten Jahren zunehmend an Bedeutung gewonnen.
     Ein wesentlicher Grund dafür liegt in der stagnierenden Entwicklung der CPU-Geschwindigkeit.
@@ -603,7 +603,7 @@ fun main() {
     \subsubsection{Laufzeitverhalten}
 
     In modernen Anwendungen, insbesondere in solchen mit hoher Benutzerinteraktion oder paralleler Datenverarbeitung, spielt effiziente Nebenläufigkeit eine zentrale Rolle.
-    Wie im vorherigen Kapitel beschrieben eignet sich sich die Funktionale Programmierung um die nebenläufige Logik deklarativ und fehlerarm zu beschreiben.
+    Wie im vorherigen Kapitel beschrieben eignet sich sich die Funktionale Programmierung, um die nebenläufige Logik deklarativ und fehlerarm zu beschreiben.
     Die tatsächliche technische Ausführung von Nebenläufigkeit wird in Java durch Threads realisiert und in Kotlin durch die Coroutines.\\
     \\
     In Java werden Threads verwendet, um parallele Ausführung zu ermöglichen.
@@ -731,9 +731,9 @@ fun main() {
     \end{table}
     
     \subsubsection{Channels}
-    Ein zentrales Merkmal der Kotlin-Coroutines ist die Unterstützung durch Channels, die eine einfache Möglichkeit bieten, Daten zwischen Coroutines zu übermitteln.
+    Ein weiteres Merkmal der Kotlin-Coroutines ist die Unterstützung durch Channels, die eine einfache Möglichkeit bieten, Daten zwischen Coroutines zu übermitteln.
     Channels ermöglichen es, dass zwei oder mehr Coroutines effizient und nebenläufig miteinander kommunizieren können.
-    Dabei müssen keine Synchronisationsmechanismen wie Locks oder Shared Mutable State verwendet werden.
+    Dabei müssen keine Synchronisationsmechanismen wie Locks oder Shared Mutable States verwendet werden.
     Dies vereinfacht die Entwicklung nebenläufiger Anwendungen erheblich und trägt zur Fehlerminimierung bei~\cite[208]{kotlin-patterns}.
     Channels lassen sich in Kotlin wie Queues verwenden.
     Eine Coroutine sendet Daten in den Channel, eine andere empfängt sie.\\
@@ -1004,7 +1004,7 @@ fun main() {
     )
 }
     \end{lstlisting}
-
+        
     \subsubsection{Infix Notation}
     Mit der Infix-Notation können Funktionen, insbesondere Extension- oder Member-Funktionen, in einer besonders kompakten und lesbaren Form aufgerufen werden.
     Voraussetzung ist, dass die Funktion genau einen Parameter hat, dieser keinen Default-Wert besitzt und dass diese Funktion mit dem Schlüsselwort \texttt{infix} deklariert wurde.\\
@@ -1097,7 +1097,7 @@ fun main() {
         title={Literaturverzeichnis}
     ]
     \appendix
-    \section{Anhang}
+    \section{Abbildungen}
 
     \begin{figure}[h]
         \centering
@@ -1127,5 +1127,18 @@ fun main() {
         \label{fig:coroutines-threads}
     \end{figure}
 
+    \clearpage
 
+    \section{Selbstständigkeitserklärung}
+    
+    Der Inhalt dieser Arbeit sowie die Codebeispiele (mit Ausnahme von Listing~\ref{lst:kotlin-coroutine}) wurden vollständig eigenständig von mir erarbeitet.
+    Die Arbeit wurde von meiner Frau, M.Sc. Lisa Marie Eilert-Spruhs, Korrektur gelesen.
+    Für die Recherche nutzte ich die Google-Suche sowie die YouTube-Suche.
+    Darüber hinaus verwendete ich GitHub Copilot unterstützend bei folgenden Aufgaben:
+    \begin{itemize}
+        \item Unterstützung bei der LaTeX-Syntax
+        \item Rechtschreibkorrekturen
+        \item Hilfestellung bei der Zeichensetzung
+        \item Unterstützung bei Formulierungen
+    \end{itemize}
 \end{document}
