@@ -103,13 +103,13 @@
     Dabei wird gezeigt, inwieweit sich Java und Kotlin in einem Projekt kombinieren lassen bzw. wie bestehende Java-Projekte mit Kotlin weitergeführt werden können.\\
     \\
     Danach werden die unterschiedlichen Features der Sprachen untersucht.
-    Zuerst gibt es eine kurze Übersicht über die Features die Kotlin von Java unterscheiden.
+    Zuerst gibt es eine kurze Übersicht über die Features, die Kotlin von Java unterscheiden.
     Anschliessend werden die wichtigsten Features, die einen tatsächlichen Mehrwert bieten, genauer erläutert.
     Dabei wird hauptsächlich auf die Unterschiede zwischen Java und Kotlin eingegangen.
-    Wie diese Features konkret genutzt werden kann nur am Rande besprochen werden, da dies den Umfang des Textes sprengen würde.\\
+    Wie diese Features konkret genutzt werden, kann nur am Rande besprochen werden, da dies den Umfang des Textes sprengen würde.\\
     \\
     Zum Schluss gibt es ein Fazit und eine kurze Zusammenfassung der Ergebnisse.
-    Die Codebeispiele in diesem Text können auf GitHub unter \url{github.com/FSpruhs/kotlin-statt-java} gefunden und können alle, zu Testzwecken selber ausgeführt werden.\\
+    Die Codebeispiele in diesem Text können auf GitHub unter \url{github.com/FSpruhs/kotlin-statt-java} gefunden und können alle zu Testzwecken selber ausgeführt werden.\\
     \\
     \section{Kurzvorstellung Java}
 
@@ -118,8 +118,8 @@
         \item \textbf{Erscheinungsjahr:} 1995
         \item \textbf{Entwickler:} Sun Microsystems
         \item \textbf{Entwickler ab 2009:} Oracle Corporation
-        \item \textbf{Programmier paradigmen:} objektorientiert
-        \item \textbf{Aktuelle LTS version:} 21
+        \item \textbf{Programmierparadigma:} objektorientiert
+        \item \textbf{Aktuelle LTS Version:} 21
     \end{itemize}
 
     \subsection{Technischer Hintergrund}
@@ -147,9 +147,23 @@
     Wie in Abbildung~\ref{fig:entwicklung-tiobe} ersichtlich, befand sich Java über fast zwei Jahrzehnte hinweg
     kontinuierlich unter den Top 3 der relevantesten Programmiersprachen.\\
     \\
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{pictures/Screenshot 2025-02-26 at 19-53-49 TIOBE Index - TIOBE}
+        \caption{Entwicklung Tiobe Index 2002 - 2024 vom 26.02.2025 }
+        \label{fig:entwicklung-tiobe}
+    \end{figure}
+    \\
     In den letzten Jahren hat die Popularität von Java zwar leicht nachgelassen, dennoch bleibt die Sprache weiterhin
     von großer Bedeutung.
     Auch im Februar 2025 belegte Java den dritten Platz im TIOBE-Index (siehe Abbildung~\ref{fig:tiobe-java-2025}).\\
+    \\
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{pictures/Screenshot 2025-02-26 at 19-54-42 TIOBE Index - TIOBE}
+        \caption{Tiobe Index Februar 2025 vom 26.02.2025}
+        \label{fig:tiobe-java-2025}
+    \end{figure}
     \\
     Java ist die Basis zahlreicher Anwendungen und wird in vielfältigen Bereichen eingesetzt.
     Darüber hinaus verfügt Java über eine umfangreiche Ökosystemlandschaft mit einer unüberschaubaren Anzahl an Bibliotheken, Paketen, Frameworks und Fachliteratur~\cite[55]{insel}.\\
@@ -167,25 +181,29 @@
         \item \textbf{Erscheinungsjahr:} 2011
         \item \textbf{Entwickler:} Jetbrains
         \item \textbf{Programmierparadigmen:} objektorientiert, funktional
-        \item \textbf{Aktuelle LTS version:} 2.1.0
+        \item \textbf{Aktuelle LTS Version:} 2.1.0
     \end{itemize}
 
     \subsection{Technischer Hintergrund}
     Kotlin wurde 2011 von der Firma JetBrains veröffentlicht.
     Ziel der Entwicklung war es, eine verbesserte Alternative zu Java zu schaffen~\cite[19]{kotlin-handbuch}.
     Schon an der Namensgebung kann man die Nähe zu Java erkennen.
-    Der Name Java bezieht sich auf eine Indonesische Insel.
-    Der Namensgeber von Kotlin ist eine russische Insel vor St. Petersburg.\\
+    Der Name Java bezieht sich auf eine indonesische Insel.
+    Bereits der Name der Programmiersprache verweist auf ihre Nähe zu Java.
+    Während sich der Name \texttt{Java} auf eine indonesische Insel bezieht, ist \texttt{Kotlin} nach einer russischen Insel nahe St. Petersburg benannt.
+    Diese Namenswahl wurde vom JetBrains-Entwicklungsteam, dessen Hauptsitz sich in St. Petersburg befand, bewusst als Anlehnung an Java getroffen~\cite[19]{kotlin-handbuch}.\\
     \\
     Obwohl Java nur etwa 15 Jahre älter als Kotlin ist, stellt dies in der schnelllebigen Welt der Softwareentwicklung eine erhebliche Zeitspanne dar.
     In vielerlei Hinsicht wirkt Java inzwischen veraltet.
-    Die Syntax ist vergleichsweise umständlich und einige moderne Sprachfeatures wurden erst später realisiert und daher nicht perfekt in die Sprache integriert~\cite[19]{kotlin-handbuch}.
-    Zudem setzt Java ausschließlich auf das objektorientierte Paradigma, während moderne Programmiersprachen häufig eine Kombination aus objektorientierter und funktionaler Programmierung unterstützen.
+    Die Syntax ist vergleichsweise umständlich und einige moderne Sprachfeatures\footnote{Zum Beispiel die funktionale Programmierung oder die Einführung von Daten Klassen} wurden erst später realisiert und daher nicht perfekt in die Sprache integriert~\cite[19]{kotlin-handbuch}.
+    Zudem basiert Java ausschließlich auf das objektorientierte Paradigma.
+    Java hat zwar mit Version 8 einige funktionale Features eingeführt, diese sind jedoch nicht so tief in die Sprache integriert wie in Kotlin.\\
+    Moderne Programmiersprachen unterstützen häufig eine Kombination aus objektorientierter und funktionaler Programmierung.
     Hierzu gehören z.B. Go~\cite[34]{go} oder Rust~\cite[105]{rust}.
-    Bei beiden Sprachen wird zugunsten der Ausführungsgeschwindigkeit darauf verzichtet ein rein objektorientiert Sprache anzubieten.\\
     \\
     Bei der Entwicklung von Kotlin hat JetBrains bewusst aus den Designfehlern von Java gelernt.
-    Gleichzeitig wurden essenzielle Eigenschaften, die zur Popularität von Java beigetragen haben, beibehalten~\cite[20]{kotlin-handbuch}.\\
+    Gleichzeitig wurden essenzielle Eigenschaften, die zur Popularität von Java beigetragen haben, beibehalten~\cite[20]{kotlin-handbuch}.
+    Wie Kotlin das umgesetzt hat wird in dem Kapitel über die Interpolarität genauer erläutert.\\
     \\
     Kotlin-Code kann ebenfalls in Bytecode kompiliert und auf der Java Virtual Machine (JVM) ausgeführt werden~\cite{kotlin-compile}.
     Dies bietet den großen Vorteil, dass Kotlin-Programme überall dort lauffähig sind, wo auch Java-Code ausgeführt werden kann.
@@ -195,9 +213,17 @@
     Dadurch können auch bestehende Java-Anwendungen schrittweise mit Kotlin weiterentwickelt werden~\cite[19-20]{kotlin-handbuch}.\\
     \\
     \subsection{Verbreitung}
-    Nach dem TIOBE index befindet sich Kotlin im März 2025 nur auf Platz 19 der relevantesten Sprachen, siehe Abbildung~\ref{fig:tiobe-kotlin-2025}.
+    Nach dem TIOBE-Index befindet sich Kotlin im März 2025 nur auf Platz 19 der relevantesten Sprachen, siehe Abbildung~\ref{fig:tiobe-kotlin-2025}.
     Es gibt aber auch gute Nachrichten für Kotlin im Bezug auf die Verbreitung und Relevanz.
-    Kotlin wurde von Google zu der bevorzugten Sprache für die Android Entwicklung erklärt~\cite{tn3-google}.\\
+    Kotlin wurde von Google zu der bevorzugten Sprache für die Android Entwicklung erklärt.
+    Google begründet das unter anderem damit, dass kotlin weniger Code erfordere was die Aufwendungen für das Schreiben, Testen und Einführen von Apps verringern würde.~\cite{tn3-google}.\\
+    \\
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{pictures/Screenshot 2025-03-11 at 22-21-04 TIOBE Index - TIOBE}
+        \caption{Tiobe Index März 2025 vom 11.03.2025}
+        \label{fig:tiobe-kotlin-2025}
+    \end{figure}
     \\
     \section{Interoperabilität zwischen Java und Kotlin}
 
@@ -643,6 +669,13 @@ fun main() {
     Dieses Beispiel verdeutlicht, dass Coroutines eine deutlich leichtgewichtigere und skalierbarere Alternative zu klassischen Threads darstellen.
     Die Messungen wurden auf einem Ubuntu 24.04 System mit 8~GB RAM und einem AMD Ryzen 5 4500U (6 Kerne) durchgeführt.
     Das Ergebnis ist auch in Abbildung~\ref{fig:coroutines-threads} zu sehen.\\
+    \\
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{pictures/Bildschirmfoto vom 2025-04-08 20-09-18}
+        \caption{Ausführung Coroutines und Threads}
+        \label{fig:coroutines-threads}
+    \end{figure}
     \\
 
     \begin{lstlisting}[language=Kotlin, caption={Coroutines.kt}, label={lst:kotlin-coroutine}]
@@ -1096,38 +1129,8 @@ fun main() {
         heading=bibintoc,
         title={Literaturverzeichnis}
     ]
-    \appendix
-    \section{Abbildungen}
-
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.8\textwidth]{pictures/Screenshot 2025-02-26 at 19-53-49 TIOBE Index - TIOBE}
-        \caption{Entwicklung Tiobe Index 2002 - 2024 vom 26.02.2025 }
-        \label{fig:entwicklung-tiobe}
-    \end{figure}
-
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.8\textwidth]{pictures/Screenshot 2025-02-26 at 19-54-42 TIOBE Index - TIOBE}
-        \caption{Tiobe Index Februar 2025 vom 26.02.2025}
-        \label{fig:tiobe-java-2025}
-    \end{figure}
-
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.8\textwidth]{pictures/Screenshot 2025-03-11 at 22-21-04 TIOBE Index - TIOBE}
-        \caption{Tiobe Index März 2025 vom 11.03.2025}
-        \label{fig:tiobe-kotlin-2025}
-    \end{figure}
-
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.8\textwidth]{pictures/Bildschirmfoto vom 2025-04-08 20-09-18}
-        \caption{Ausführung Coroutines und Threads}
-        \label{fig:coroutines-threads}
-    \end{figure}
-
     \clearpage
+    \appendix
 
     \section{Selbstständigkeitserklärung}
     
