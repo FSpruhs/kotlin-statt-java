@@ -312,7 +312,7 @@ fun main() {
 
     \subsection{Kurzübersicht}
 
-    In der folgenden Tabelle~\ref{tab:kotlin-java-features} werden zentrale Sprachfeatures aufgeführt, durch die sich Kotlin von Java unterscheidet.
+    In der folgenden Tabelle~\ref{tab:kotlin-java-features} werden zentrale Sprachfeatures aufgeführt, durch die sich Kotlin von Java unterscheidet~\cite{doc-comparison}.
     Anschließend werden einige der wichtigsten Unterschiede der beiden Sprachen genauer erläutert.\\
     \\
     Bei den Features, die Java besitzt, die aber in Kotlin nicht mehr vorhanden sind, lässt sich unterscheiden zwischen vollständig entfallenen Funktionen und solchen, die durch alternative Konzepte ersetzt wurden.\\
@@ -354,7 +354,7 @@ fun main() {
             \textbf{Kotlin-Features, die Java nicht hat} & \textbf{Java-Features, die Kotlin nicht hat} \\
             \hline
             \hline
-            Lambda expressions & Checked Exceptions \\
+            Functions als First Class Citizen & Checked Exceptions \\
             \hline
             Inline functions & Primitive types \\
             \hline
@@ -397,7 +397,7 @@ fun main() {
             Explicit API Mode and better control of API surface &  \\
             \hline
         \end{tabular}
-        \caption{Vergleich Kotlin und Java Features}
+        \caption{Vergleich Kotlin und Java Features~\cite{doc-comparison}}
         \label{tab:kotlin-java-features}
     \end{table}
 
@@ -529,7 +529,7 @@ public class NullHandlingExample {
     Diese übergebene Funktion nimmt ebenfalls zwei Zahlen entgegen und gibt eine einzelne Zahl zurück.\\
     \\
     Listing~\ref{lst:kotlin-higher-order-function} zeigt die Kotlin-Variante, während Listing~\ref{lst:java-higher-order-function} die Java-Implementierung darstellt.
-
+    \\
     An der Kotlin-Implementierung wird deutlich, dass keine zusätzliche Klasse erforderlich ist.
     Die Funktion kann direkt als Parameter übergeben werden.
     In Java hingegen ist die Übergabe einer Funktion nur über ein funktionales Interface möglich.
@@ -570,12 +570,12 @@ public class HigherOrderJava {
 
     \subsubsection{Inline Functions}
     Kotlin unterstützt sogenannte Inline Functions, mit denen sich der Overhead von Funktionsaufrufen reduzieren lässt.
-    Dies ist besonders nützlich in Verbindung mit Higher-Order Functions, da es die Performance verbessert und den generierten Bytecode optimiert.\\
+    Dies ist besonders nützlich in Verbindung mit Higher-Order Functions, da es die Performance verbessert und den generierten Bytecode optimiert~\cite{kotlin-inline}.\\
     \\
     Ein vergleichbares Feature in Java sind Lambda-Ausdrücke.
     Diese bieten jedoch nicht den gleichen Grad an Optimierung wie die Inline-Funktionen in Kotlin.
     Bei einer Inline-Funktion wird der Funktionscode direkt an der Aufrufstelle in den Bytecode eingefügt, anstatt zur Laufzeit aufgerufen zu werden.
-    Dadurch wird der Overhead zur Laufzeit vermieden, der bei normalen Funktionsaufrufen entsteht.\\
+    Dadurch wird der Overhead zur Laufzeit vermieden, der bei normalen Funktionsaufrufen entsteht~\cite{kotlin-inline}.\\
     \\
     Listing~\ref{lst:kotlin-inline-function} zeigt eine Inline-Funktion in Kotlin.
     Die Funktion \texttt{transformString} nimmt einen \texttt{String} sowie eine Funktion entgegen, die einen \texttt{String} als Parameter akzeptiert und ebenfalls einen \texttt{String} zurückgibt.
@@ -585,7 +585,7 @@ public class HigherOrderJava {
     Dies wird durch das Schlüsselwort \texttt{inline} erreicht~\cite{kotlin-inline}.\\
     \\
 
-    \begin{lstlisting}[language=Kotlin, caption={InlineFunction.java}, label={lst:kotlin-inline-function}]
+    \begin{lstlisting}[language=Kotlin, caption={InlineFunction.kt}, label={lst:kotlin-inline-function}]
 
 inline fun transformString(
     input: String,
@@ -633,10 +633,6 @@ fun main() {
     \\
     Die Ausführungszeiten sind in Tabelle~\ref{tab:coroutine-thread-pool} dargestellt.
     Hier zeigt sich deutlich der Effizienzvorteil von Coroutines.
-    Sie sind deutlich schneller als Threads, da sie ressourcenschonender arbeiten und nicht direkt an System-Threads gebunden sind.
-    Mehrere Coroutines an sich können gleichzeitig auf einem Thread laufen, da blockierende Operationen nicht den Thread blockieren.
-    Der Dispatcher übernimmt das Scheduling und sorgt dafür, dass nur aktive Coroutines weiter ausgeführt werden.\\
-    \\
     Je mehr Threads genutzt werden, desto schneller wird die Ausführungszeit.
     Bei 2.500 und 5.000 Threads ist die Ausführungszeit fast gleich zu den Coroutines.
     Dafür ist aber der Speicherverbrauch bei Threads deutlich höher.
@@ -742,8 +738,7 @@ fun main() {
     \subsubsection{Channels}
     Ein weiteres Merkmal der Kotlin-Coroutines ist die Unterstützung durch Channels, die eine einfache Möglichkeit bieten, Daten zwischen Coroutines zu übermitteln.
     Channels ermöglichen es, dass zwei oder mehr Coroutines effizient und nebenläufig miteinander kommunizieren können.
-    Dabei müssen keine Synchronisationsmechanismen wie Locks oder Shared Mutable States verwendet werden.
-    Dies vereinfacht die Entwicklung nebenläufiger Anwendungen erheblich und trägt zur Fehlerminimierung bei~\cite[208]{kotlin-patterns}.
+    Dabei müssen keine Synchronisationsmechanismen\footnote{Wie Locks oder Shared Mutable States.} verwendet werden~\cite[208]{kotlin-patterns}.
     Channels lassen sich in Kotlin wie Queues verwenden.
     Eine Coroutine sendet Daten in den Channel, eine andere empfängt sie.\\
     \\
@@ -835,7 +830,7 @@ public class JavaChannels {
     Kotlin bietet die Möglichkeit, bestehende Klassen um neue Funktionen zu erweitern, ohne deren Quellcode zu verändern oder von ihnen erben zu müssen.
     Diese sogenannten Extension Functions werden wie reguläre Methoden auf Instanzen aufgerufen.
     Besonders praktisch ist, dass sich mit Extension Functions nicht nur eigene Klassen erweitern lassen, sondern auch Klassen aus externen Bibliotheken.
-    Dadurch können fehlende Funktionalitäten bequem nachgerüstet werden, ohne bestehende Strukturen zu verändern.\\
+    Dadurch können fehlende Funktionalitäten bequem nachgerüstet werden, ohne bestehende Strukturen zu verändern~\cite{kotlin-extensions}.\\
     \\
     In Listing~\ref{lst:kotlin-extension-function} wird eine Extension Function \texttt{repeat} für die Klasse \texttt{String} implementiert.
     Die Definition erfolgt durch Voranstellen des Klassennamens vor den Funktionsnamen, getrennt durch einen Punkt.
@@ -875,8 +870,7 @@ fun main() {
     In Listing~\ref{lst:kotlin-builder-pattern} wird am Beispiel des Builder Patterns gezeigt, wie diese Features zusammenwirken.
     Das Builder Pattern ist ein klassisches Entwurfsmuster aus der „Gang of Four“-Sammlung, das häufig zur Konstruktion komplexer Objekte mit vielen optionalen Parametern verwendet wird~\cite[139]{gang-of-four}.\\
     \\
-    In der Klasse \texttt{User} werden die Attribute \texttt{firstName}, \texttt{lastName}, \texttt{titles} und \texttt{age} im Primary Constructor definiert.
-    Alle mit Default-Werten.
+    In der Klasse \texttt{User} werden die Attribute \texttt{firstName}, \texttt{lastName}, \texttt{titles} und \texttt{age} im Primary Constructor definiert, alle mit Default-Werten.
     Dadurch wird der Builder überflüssig, da sich Objekte flexibel und übersichtlich direkt über den Konstruktor erstellen lassen.
     In der \texttt{main}-Methode wird ein Objekt mit allen Attributen und ein weiteres nur mit \texttt{firstName} und \texttt{lastName} erstellt~\cite[46]{kotlin-patterns}.\\
     \\
@@ -908,7 +902,7 @@ fun main() {
 }
     \end{lstlisting}
 
-    \begin{lstlisting}[language=Java, caption={JavaUser.kt}, label={lst:java-builder-pattern}]
+    \begin{lstlisting}[language=Java, caption={JavaUser.java}, label={lst:java-builder-pattern}]
 
 import java.util.List;
 
@@ -968,14 +962,14 @@ public class JavaUser {
     \end{lstlisting}
 
     \subsubsection{Value Classes}
-    Value Objects sind ein wichtiger Bestandteil bei der Implementierung von Domain Driven Design(DDD).
-    Ein ziel von von Value Objects im DDD Kontext ist es, die Integrität der Daten zu Gewährleisten und sicherzustellen, dass die Objekte in einem konsistenten Zustand sind.
-    Weiterhin sollen technische Werte wie Int oder String durch Fachliche Werte ersetzt werden~\cite[219]{red-book}.\\
+    Value Objects sind ein wichtiger Bestandteil bei der Implementierung von Domain Driven Design(DDD)\footnote{Domain Driven Design ist ein Ansatz zur Softwareentwicklung, der auf den Ideen von Eric Evans basiert~\cite{evans-ddd}.}.
+    Ein Ziel von von Value Objects im DDD Kontext ist es, die Integrität der Daten zu gewährleisten und sicherzustellen, dass die Objekte in einem konsistenten Zustand sind.
+    Weiterhin sollen technische Werte wie Int oder String durch fachliche Werte ersetzt werden~\cite[219]{red-book}.\\
     \\
     Hierzu können in Kotlin Value Classes verwendet werden.
-    Diese sind eine spezielle Art von Klassen, die dazu dienen, einen einzelnen Primitiven Wert zu kapseln und zusätzliche Funktionalität bereitzustellen.
-    Zur Laufzeit werden diese Value Classes in den entsprechenden Primitiven Typen umgewandelt.
-    Man hat also die Laufzeitvorteile von Primitiven Typen, die Typsicherheit und die Möglichkeit, zusätzliche Funktionalität und Validierung hinzuzufügen~\cite{kotlin-value-classes}.\\
+    Diese sind eine spezielle Art von Klassen, die dazu dienen, einen einzelnen primitiven Wert zu kapseln und zusätzliche Funktionalität bereitzustellen.
+    Zur Laufzeit werden diese Value Classes in den entsprechenden primitiven Typen umgewandelt.
+    Man hat also die Laufzeitvorteile von primitiven Typen, die Typsicherheit und die Möglichkeit, zusätzliche Funktionalität und Validierung hinzuzufügen~\cite{kotlin-value-classes}.\\
     \\
     In Listing~\ref{lst:kotlin-value-classes} wird eine Value Class \texttt{NickName} und \texttt{Age} implementiert.
     Dazu wird die Annotation \texttt{@JvmInline} und das Schlüsselwort value verwendet.
@@ -1025,7 +1019,7 @@ fun main() {
     Dadurch ergibt sich ein besonders lesbarer Code.
     Dieser ähnelt schon fast natürlicher Sprache.
     In Zeile 10 wird dieselbe Funktion regulär mit Punkt- und Klammernotation aufgerufen.
-    Beide Varianten haben führen zum selben Ergebnis~\cite{kotlin-infix-notation}.\\
+    Beide Varianten führen zum selben Ergebnis~\cite{kotlin-infix-notation}.\\
     \\
     Die Infix-Notation kann dazu beitragen, bestimmte Ausdrücke wie z.B. mathematische oder domänenspezifische Operationen intuitiver lesbar zu gestalten.\\
     \\
