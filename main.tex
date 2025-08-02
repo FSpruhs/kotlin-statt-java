@@ -231,7 +231,7 @@
     Kotlin und Java lassen sich nahtlos in einem Projekt kombinieren, was zahlreiche Vorteile mit sich bringt.
     Zum einen können in Kotlin geschriebene Klassen und Funktionen problemlos in Java verwendet werden und umgekehrt.
     Zum anderen ermöglicht diese Interoperabilität, bestehende Java-Projekte schrittweise mit Kotlin weiterzuentwickeln oder nach und nach auf Kotlin umzustellen, ohne den vorhandenen Code sofort ersetzen zu müssen.
-    Dies ist besonders für Unternehmen mit großen Java-Codebasen relevant, die nicht abrupt auf Kotlin wechseln können~\cite[20]{kotlin-handbuch}.\\
+    Dies ist besonders für Unternehmen mit großen Java-Codebasen relevant, die nicht abrupt auf Kotlin wechseln können oder wollen.~\cite[20]{kotlin-handbuch}\\
     \\
     Im folgenden Beispiel wird vorgestellt, wie Kotlin-Code in einer Java-Umgebung ausgeführt werden kann.
     Die zugehörige \texttt{.java}-Datei enthält eine Java-Klasse mit einer \texttt{main}-Methode.
@@ -246,52 +246,28 @@ class ClassGreeter {
         println("Hello from kotlin class method!")
     }
 }
-
-class StaticGreeter {
-    companion object {
-
-        @JvmStatic
-        fun greet() {
-            println("Hello from kotlin static method!")
-        }
-    }
-}
-object SingletonGreeter {
-    fun greet() {
-        println("Hello from kotlin singleton method!")
-    }
-}
     \end{lstlisting}
 
     \begin{lstlisting}[language=Java, caption={Main.java}]
 import main.java.com.spruhs.ClassGreeter;
-import main.java.com.spruhs.SingletonGreeter;
-import main.java.com.spruhs.StaticGreeter;
 
 public static void main(String[] args) {
     ClassGreeter classGreeter = new ClassGreeter();
     classGreeter.greet();
-
-    StaticGreeter.greet();
-
-    SingletonGreeter.INSTANCE.greet();
 }
     \end{lstlisting}
 
     \begin{tcolorbox}[colback=black!5!white, colframe=black, title=Ausgabe]
         Hello from kotlin class method!\\
-        Hello from kotlin static method!\\
-        Hello from kotlin singleton method!
     \end{tcolorbox}
     
     \subsection{Java in Kotlin integrieren}
     Auch die umgekehrte Richtung ist problemlos möglich.
     Java-Code lässt sich ohne Weiteres in Kotlin verwenden.
     Dies bietet insbesondere den Vorteil, dass bestehende Java-Bibliotheken und -Frameworks weiterhin genutzt werden können.
-    Dies spielt für viele Kotlin-Projekte eine entscheidende Rolle, insbesondere wenn auf etablierte Java-Ökosysteme wie \texttt{Spring}~\cite{spring} oder \texttt{Hibernate}~\cite{hibernate} zurückgegriffen wird.\\
+    Dies spielt für viele Kotlin-Projekte eine entscheidende Rolle, insbesondere wenn auf etablierte Java-Ökosysteme wie \texttt{Spring}\footnote{Ein belibtes Framework zum erstellen von Java Anwendungen.}~\cite{spring} oder \texttt{Hibernate}\footnote{Ein Framework zur anbindung von relationalen Datenbanken an eine Java Anwendung. Wir unteranderem von Spring verwendet.}~\cite{hibernate} zurückgegriffen wird.\\
     \\
-    Im folgenden Beispiel werden zwei verschiedene Arten gezeigt, wie Java-Klassen in Kotlin eingebunden werden können.
-    Einmal über eine Instanzmethode und einmal über eine statische Methode.\\
+    Im folgenden Beispiel werden zwei verschiedene Arten gezeigt, wie Java-Klassen in Kotlin eingebunden werden können, einmal über eine Instanzmethode und einmal über eine statische Methode.\\
     \\
     Die Integration von Java in Kotlin ist deshalb so einfach, da Kotlin die Java-Klassen so behandelt, als wären sie eigene Kotlin-Klassen.
     Statische Methoden und Felder werden in Kotlin über den Klassennamen aufgerufen, Instanzmethoden funktionieren analog wie in Kotlin selbst.
